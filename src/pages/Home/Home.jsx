@@ -52,6 +52,7 @@ function Home() {
 
 					<Chart type="bar" justify="flex-start">
 						<Chart.Bar
+							animate={true}
 							width="3.33rem"
 							color="var(--success-color)"
 							height={50}
@@ -59,6 +60,7 @@ function Home() {
 							value="50 Ft"
 						/>
 						<Chart.Bar
+							animate={true}
 							width="3.33rem"
 							color="var(--danger-color)"
 							height={100}
@@ -66,6 +68,7 @@ function Home() {
 							value="100 Ft"
 						/>
 						<Chart.Bar
+							animate={true}
 							width="3.33rem"
 							color="var(--success-color)"
 							height={50}
@@ -73,6 +76,7 @@ function Home() {
 							value="50 Ft"
 						/>
 						<Chart.Bar
+							animate={true}
 							width="3.33rem"
 							color="var(--danger-color)"
 							height={100}
@@ -80,6 +84,7 @@ function Home() {
 							value="100 Ft"
 						/>
 						<Chart.Bar
+							animate={true}
 							width="3.33rem"
 							color="var(--success-color)"
 							height={50}
@@ -87,6 +92,7 @@ function Home() {
 							value="50 Ft"
 						/>
 						<Chart.Bar
+							animate={true}
 							width="3.33rem"
 							color="var(--danger-color)"
 							height={100}
@@ -94,6 +100,7 @@ function Home() {
 							value="100 Ft"
 						/>
 						<Chart.Bar
+							animate={true}
 							width="3.33rem"
 							color="var(--success-color)"
 							height={50}
@@ -101,6 +108,7 @@ function Home() {
 							value="50 Ft"
 						/>
 						<Chart.Bar
+							animate={true}
 							width="3.33rem"
 							color="var(--danger-color)"
 							height={100}
@@ -108,6 +116,7 @@ function Home() {
 							value="100 Ft"
 						/>
 						<Chart.Bar
+							animate={true}
 							width="3.33rem"
 							color="var(--success-color)"
 							height={50}
@@ -115,6 +124,7 @@ function Home() {
 							value="50 Ft"
 						/>
 						<Chart.Bar
+							animate={true}
 							width="3.33rem"
 							color="var(--danger-color)"
 							height={100}
@@ -135,8 +145,7 @@ function Home() {
 						justify="center"
 						size="16rem"
 						offset={showCaption ? "1rem" : "0"}
-						legend={pieLegend}
-					>
+						legend={pieLegend}>
 						<Chart.Pie
 							color="var(--category-salary-color)"
 							fromDegree={0}

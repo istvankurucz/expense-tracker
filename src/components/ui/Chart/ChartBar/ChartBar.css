@@ -31,14 +31,17 @@
 	border-radius: var(--br);
 	position: absolute;
 	inset: 0;
-	top: 100%;
+	top: calc(100% - var(--bar-height));
 	transition: scale 200ms ease;
-	animation: grow 500ms ease 1 forwards;
 }
 .chartBar:hover .chartBar__bar::after {
 	scale: 1.05;
 }
 
+.chartBar--animate .chartBar__bar::after {
+	top: 100%;
+	animation: grow 500ms ease 1 forwards;
+}
 @keyframes grow {
 	to {
 		top: calc(100% - var(--bar-height));
