@@ -1,7 +1,15 @@
 .group__container {
+	min-height: var(--min-height);
 	display: flex;
 }
 
 .group__body {
 	flex: 1;
+	padding-left: 1rem;
+}
+
+@media screen and (max-width: 768px) {
+	.group__body {
+		padding-left: 0;
+	}
 }

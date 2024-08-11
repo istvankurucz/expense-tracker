@@ -74,7 +74,7 @@ function JoinGroup() {
 			const userRef = doc(db, "users", user.uid);
 			await updateDoc(groupRef, {
 				members: arrayUnion(userRef),
-				roles: arrayUnion({ role: "user", user: userRef }),
+				roles: arrayUnion({ role: "member", member: userRef }),
 			});
 
 			// Enable submit button
@@ -116,8 +116,7 @@ function JoinGroup() {
 							show={showAlert}
 							setShow={setShowAlert}
 							icon={faInfo}
-							className="joinGroup__alert"
-						>
+							className="joinGroup__alert">
 							<p className="joinGroup__p">
 								Add meg azt az egyedi kódot, amivel csatlakozni tudsz a csapathoz.
 							</p>

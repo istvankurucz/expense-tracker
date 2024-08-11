@@ -1,0 +1,26 @@
+.p {
+	color: var(--color);
+	margin-bottom: 1rem;
+}
+
+/* #region Variants */
+.p--text {
+	--color: var(--text-color);
+}
+
+.p--info {
+	--color: var(--info-color);
+}
+
+.p--accent {
+	--color: var(--accent-color);
+}
+
+.p--success {
+	--color: var(--success-color);
+}
+
+.p--danger {
+	--color: var(--danger-color);
+}
+/* #endregion */

@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { useGroupContext } from "../../../contexts/group/GroupContext";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -11,8 +12,12 @@ import Button from "../../../components/ui/Button/Button";
 import "./GroupSidebar.css";
 
 function GroupSidebar({ show, setShow }) {
+	const { group } = useGroupContext();
+
 	return (
 		<aside className={`groupSidebar${show ? " groupSidebar--show" : ""}`}>
+			<h3 className="groupSidebar__name">{group?.name}</h3>
+
 			<nav className="groupSidebar__nav">
 				<ul className="groupSidebar__menu">
 					<li className="groupSidebar__menu__item">
@@ -21,14 +26,20 @@ function GroupSidebar({ show, setShow }) {
 							Áttekintés
 						</Link>
 					</li>
+
+					<hr className="groupSidebar__menu__divider" />
+
 					<li className="groupSidebar__menu__item">
 						<Link to="">
 							<FontAwesomeIcon icon={faRectangleList} />
 							Jelentések
 						</Link>
 					</li>
+
+					<hr className="groupSidebar__menu__divider" />
+
 					<li className="groupSidebar__menu__item">
-						<Link to="">
+						<Link to={`/groups/${group.id}/settings`}>
 							<FontAwesomeIcon icon={faGear} />
 							Beállítások
 						</Link>

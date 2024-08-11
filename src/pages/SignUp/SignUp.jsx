@@ -190,7 +190,7 @@ function SignUp() {
 		<Auth.Overlay show={true} className="signup">
 			<Auth.Modal>
 				<Modal.Header>
-					<Auth.Title>Regisztráció</Auth.Title>
+					<Modal.Title>Regisztráció</Modal.Title>
 				</Modal.Header>
 
 				<form onSubmit={signUpUser}>

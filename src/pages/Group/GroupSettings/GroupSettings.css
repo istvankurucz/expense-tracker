@@ -1,0 +1,36 @@
+.groupSettings__p {
+	margin-bottom: 1rem;
+}
+
+.groupSettings__data__row {
+	display: flex;
+	align-items: center;
+}
+.groupSettings__data__row:not(:last-child) {
+	margin-bottom: 1.25rem;
+}
+
+.groupSetting__data__row__text {
+	width: 8rem;
+	display: inline-block;
+}
+
+.groupSetting__data__row__value {
+	width: 8rem;
+	display: inline-block;
+	font-weight: 500;
+	text-wrap: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.groupSettings__data__row__action {
+	font-size: var(--fs-s);
+	color: var(--accent-color);
+	background-color: var(--primary-color);
+	border: none;
+	cursor: pointer;
+}
+.groupSettings__data__row__action:hover {
+	text-decoration: underline;
+}

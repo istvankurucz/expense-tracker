@@ -248,7 +248,7 @@ function Home() {
 										category={transaction.category}
 										type={transaction.type}
 										date={transaction.date.toLocaleDateString().replaceAll(" ", "")}
-										group={transaction.group ?? "Group 1"}
+										group={transaction.group}
 										user={transaction.user}
 										name={transaction.name}
 										amount={transaction.amount}

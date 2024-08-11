@@ -16,10 +16,12 @@ import HeaderSidebar from "./HeaderSidebar/HeaderSidebar";
 import HeaderActionButton from "./HeaderActionButton/HeaderActionButton";
 import HeaderAuthButton from "./HeaderAuthButton/HeaderAuthButton";
 import IconLink from "../../ui/IconLink/IconLink";
+import useGroups from "../../../hooks/group/useGroups";
 import "./Header.css";
 
 function Header() {
 	// States
+	const { groups } = useGroups(3);
 	const [showSidebar, setShowSidebar] = useState(false);
 
 	return (
@@ -48,15 +50,15 @@ function Header() {
 								</Link>
 
 								<ul className="header__submenu">
-									<li>
-										<Link to="/">Csoport 1</Link>
-									</li>
-									<li>
-										<Link to="/">Csoport 2</Link>
-									</li>
-									<li>
-										<Link to="/">Csoport 3</Link>
-									</li>
+									{groups.length > 0 ? (
+										groups.map((group) => (
+											<li key={group.id}>
+												<Link to={`/groups/${group.id}`}>{group.name}</Link>
+											</li>
+										))
+									) : (
+										<li>Nincs csoport</li>
+									)}
 									<hr className="header__submenu__divider" />
 									<li className="header__menu__item--accent">
 										<IconLink to="/new-group">

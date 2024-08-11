@@ -1,0 +1,18 @@
+.groupSettingsMembers__list {
+	list-style: none;
+}
+
+.groupSettingsMembers__list__item {
+	display: flex;
+	gap: 2rem;
+	align-items: center;
+	border-bottom: 1px solid var(--secondary-color);
+	padding-block: 1rem;
+}
+.groupSettingsMembers__list__item:last-child {
+	border-bottom: none;
+}
+
+.groupSettingsMembers__list__item__admin {
+	color: var(--accent-color);
+}

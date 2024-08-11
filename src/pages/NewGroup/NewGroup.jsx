@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useStateValue } from "../../contexts/Context API/StateProvider";
-import { addDoc, collection, doc } from "firebase/firestore";
+import { addDoc, collection, doc, serverTimestamp } from "firebase/firestore";
 import { db } from "../../config/firebase/firebase";
 import { faInfo } from "@fortawesome/free-solid-svg-icons";
 import Page from "../../components/layout/Page/Page";
@@ -51,6 +51,7 @@ function NewGroup() {
 				members: [userRef],
 				roles: [{ role: "admin", member: userRef }],
 				joinCode: generateJoinCode(),
+				lastTransaction: serverTimestamp(),
 			});
 
 			// Enable submit button
@@ -81,8 +82,7 @@ function NewGroup() {
 							show={showOptions}
 							setShow={setShowOptions}
 							icon={faInfo}
-							className="newGroup__data__alert"
-						>
+							className="newGroup__data__alert">
 							<p className="newGroup__data__p">
 								A csoport létrehozásával te leszel a csoport adminisztrátora. Ezt a szerepet
 								a későbbiekben bármikor módosíthatod a csoport beállításai menüpontban.

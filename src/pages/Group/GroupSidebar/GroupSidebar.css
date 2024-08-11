@@ -4,12 +4,19 @@
 	padding: 2rem 1rem;
 }
 
+.groupSidebar__name {
+	margin-bottom: 2rem;
+}
+
 .groupSidebar__menu {
 	list-style: none;
 }
 
-.groupSidebar__menu__item:not(:last-child) {
-	margin-bottom: 1rem;
+.groupSidebar__menu__divider {
+	height: 1px;
+	background-color: var(--secondary-color);
+	border: none;
+	margin-block: 0.5rem;
 }
 
 .groupSidebar__menu__item a {
@@ -31,6 +38,7 @@
 .groupSidebar__button {
 	display: none;
 	border-radius: 0 var(--br-pill) var(--br-pill) 0;
+	opacity: 0.5;
 	padding: 0.75rem 1rem;
 	position: absolute;
 	top: 2rem;

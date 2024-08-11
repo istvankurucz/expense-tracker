@@ -65,7 +65,7 @@ function PasswordReset() {
 		<Auth.Overlay show>
 			<Auth.Modal>
 				<Modal.Header>
-					<Auth.Title>Új jelszó</Auth.Title>
+					<Modal.Title>Új jelszó</Modal.Title>
 				</Modal.Header>
 
 				<form onSubmit={sendPwResetEmail}>

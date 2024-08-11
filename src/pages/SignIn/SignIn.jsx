@@ -84,7 +84,7 @@ function SignIn() {
 		<Auth.Overlay show={true} className="signin">
 			<Auth.Modal>
 				<Modal.Header>
-					<Auth.Title>Bejelentkezés</Auth.Title>
+					<Modal.Title>Bejelentkezés</Modal.Title>
 				</Modal.Header>
 
 				<form onSubmit={signInUser}>

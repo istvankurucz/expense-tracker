@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useStateValue } from "../../contexts/Context API/StateProvider";
 import { Timestamp, addDoc, collection, doc } from "firebase/firestore";
@@ -17,6 +17,7 @@ import disableSubmitButton from "../../utils/form/disableSubmitButton";
 import enableSubmitButton from "../../utils/form/enableSubmitButton";
 import UserLoadingFrame from "../../components/layout/LoadingFrame/UserLoadingFrame/UserLoadingFrame";
 import FormButtons from "../../components/layout/FormButtons/FormButtons";
+import useGroupSelect from "../../hooks/group/useGroupSelect";
 import "./NewTransaction.css";
 
 const typeSelectItems = [
@@ -30,14 +31,12 @@ const typeSelectItems = [
 	},
 ];
 
-const groupSelectItems = ["Group 1", "Group 2", "Group 3", "Group 4", "Group 5"];
-
 function NewTransaction() {
 	// States
 	const [{ user }, dispatch] = useStateValue();
+	const { groupSelectItems, index, setIndex } = useGroupSelect();
 	const [typeIndex, setTypeIndex] = useState(0);
 	const [categoryIndex, setCategoryIndex] = useState(0);
-	const [groupIndex, setGroupIndex] = useState(0);
 	const [loading, setLoading] = useState(false);
 
 	// Refs
@@ -56,7 +55,10 @@ function NewTransaction() {
 	);
 	const defaultDate = new Date().toLocaleDateString().replaceAll(".", "").replaceAll(" ", "-");
 
+	useEffect(() => {}, []);
+
 	// Functions
+
 	function getFormData() {
 		const type = typeSelectItems[typeIndex].type;
 		const category = validCategories[categoryIndex].name;
@@ -64,7 +66,9 @@ function NewTransaction() {
 		const amount = amountRef.current.valueAsNumber;
 		const date = new Date(dateRef.current.value);
 		const comment = commentRef.current.value;
-		const group = null;
+
+		const groupId = groupSelectItems[index].id;
+		const group = groupId === "no-group" ? null : doc(db, "groups", groupId);
 
 		return { type, category, name, amount, date, comment, group };
 	}
@@ -187,9 +191,9 @@ function NewTransaction() {
 						<Select
 							label="Csoport"
 							id="newTransactionGroup"
-							items={groupSelectItems}
-							index={groupIndex}
-							setIndex={setGroupIndex}
+							items={groupSelectItems.map((item) => item.name)}
+							index={index}
+							setIndex={setIndex}
 							required
 						/>
 					</Section>

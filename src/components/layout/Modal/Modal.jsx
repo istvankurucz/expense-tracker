@@ -3,6 +3,7 @@ import ModalBody from "./ModalBody";
 import ModalClose from "./ModalClose";
 import ModalFooter from "./ModalFooter";
 import ModalHeader from "./ModalHeader";
+import ModalTitle from "./ModalTitle";
 import "./Modal.css";
 
 function Modal({ className, children }) {
@@ -15,6 +16,7 @@ Modal.propTypes = {
 };
 
 Modal.Header = ModalHeader;
+Modal.Title = ModalTitle;
 Modal.Body = ModalBody;
 Modal.Footer = ModalFooter;
 Modal.Close = ModalClose;

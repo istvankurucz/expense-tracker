@@ -12,9 +12,9 @@ import NewTransaction from "./pages/NewTransaction/NewTransaction";
 import NewGroup from "./pages/NewGroup/NewGroup";
 import Group from "./pages/Group/Group";
 import Groups from "./pages/Groups/Groups";
-import "./App.css";
 import JoinGroup from "./pages/JoinGroup/JoinGroup";
 import GroupProvider from "./contexts/group/GroupContext";
+import "./App.css";
 
 function App() {
 	// Hooks
@@ -49,9 +49,9 @@ function App() {
 				<Route path="/join-group" element={renderWithHeaderAndFooter(<JoinGroup />)} />
 				<Route
 					path="/groups/:groupId"
-					element={
-						<GroupProvider>{renderWithHeaderAndFooter(<Group />)}</GroupProvider>
-					}></Route>
+					element={<GroupProvider>{renderWithHeaderAndFooter(<Group />)}</GroupProvider>}>
+					<Route path="settings" element={<Group.Settings />} />
+				</Route>
 
 				<Route path="/signin" element={<SignIn />} />
 				<Route path="/signup" element={<SignUp />} />

@@ -7,9 +7,11 @@ import CategoryIcon from "../CategoryIcon/CategoryIcon";
 import formatPrice from "../../../utils/format/formatPrice";
 import "./Transaction.css";
 import Tooltip from "../Tooltip/Tooltip";
+import { useStateValue } from "../../../contexts/Context API/StateProvider";
 
 function Transaction({ category, type, date, group, user, name, amount, comment = "" }) {
 	// States
+	const state = useStateValue();
 	const [showComment, setShowComment] = useState(false);
 
 	// Variables
@@ -22,13 +24,16 @@ function Transaction({ category, type, date, group, user, name, amount, comment 
 			<span className="transaction__date">{date}</span>
 
 			<div className="transaction__body">
-				{group != null && (
+				{(group != null || state.user?.id === user.id) && (
 					<div className="transaction__body__top">
-						<Link to="/" className="transaction__group">
-							{group}
-						</Link>
-						{" - "}
-						<span className="transaction__user">{user?.name}</span>
+						{group != null && (
+							<Link to={`/groups/${group.id}`} className="transaction__group">
+								{group.name}
+							</Link>
+						)}
+						{state.user?.id === user.id && (
+							<span className="transaction__user"> - {user.name}</span>
+						)}
 					</div>
 				)}
 
@@ -39,8 +44,7 @@ function Transaction({ category, type, date, group, user, name, amount, comment 
 						<div
 							className="transaction__comment"
 							onMouseEnter={() => setShowComment(true)}
-							onMouseLeave={() => setShowComment(false)}
-						>
+							onMouseLeave={() => setShowComment(false)}>
 							<FontAwesomeIcon icon={faComment} className="transaction__hasComment" />
 
 							<Tooltip show={showComment} variant="dark">
@@ -63,7 +67,7 @@ Transaction.propTypes = {
 	category: PropTypes.object.isRequired,
 	type: PropTypes.oneOf(["income", "expense"]),
 	date: PropTypes.string.isRequired,
-	group: PropTypes.string,
+	group: PropTypes.oneOfType([PropTypes.object]),
 	user: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 	name: PropTypes.string.isRequired,
 	amount: PropTypes.number.isRequired,

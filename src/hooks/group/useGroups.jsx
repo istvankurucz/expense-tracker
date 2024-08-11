@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useStateValue } from "../../contexts/Context API/StateProvider";
-import { collection, doc, getDocs, query, where } from "firebase/firestore";
+import { collection, doc, getDocs, limit, orderBy, query, where } from "firebase/firestore";
 import { db } from "../../config/firebase/firebase";
 
-function useGroups() {
+function useGroups(max = null) {
 	const [{ user }] = useStateValue();
 	const [groups, setGroups] = useState([]);
 	const [groupLoading, setGroupsLoading] = useState(false);
@@ -15,7 +15,22 @@ function useGroups() {
 			try {
 				const groupsRef = collection(db, "groups");
 				const userRef = doc(db, "users", user.uid);
-				const q = query(groupsRef, where("members", "array-contains", userRef));
+
+				let q;
+				if (max != null) {
+					q = query(
+						groupsRef,
+						where("members", "array-contains", userRef),
+						orderBy("lastTransaction", "desc"),
+						limit(max)
+					);
+				} else {
+					q = query(
+						groupsRef,
+						where("members", "array-contains", userRef),
+						orderBy("lastTransaction", "desc")
+					);
+				}
 				const res = await getDocs(q);
 
 				const data = res.docs.map((group) => ({
@@ -34,7 +49,7 @@ function useGroups() {
 		if (user == null) return;
 
 		fetchGroups();
-	}, [user]);
+	}, [user, max]);
 
 	return { groups, groupLoading };
 }
