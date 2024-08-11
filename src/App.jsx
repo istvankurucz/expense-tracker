@@ -49,8 +49,9 @@ function App() {
 				<Route path="/join-group" element={renderWithHeaderAndFooter(<JoinGroup />)} />
 				<Route
 					path="/groups/:groupId"
-					element={<GroupProvider>{renderWithHeaderAndFooter(<Group />)}</GroupProvider>}
-				/>
+					element={
+						<GroupProvider>{renderWithHeaderAndFooter(<Group />)}</GroupProvider>
+					}></Route>
 
 				<Route path="/signin" element={<SignIn />} />
 				<Route path="/signup" element={<SignUp />} />

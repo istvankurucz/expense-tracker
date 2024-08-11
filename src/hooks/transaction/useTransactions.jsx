@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useStateValue } from "../../contexts/Context API/StateProvider";
-import { collection, getDocs, orderBy, query, limit } from "firebase/firestore";
+import { collection, getDocs, orderBy, query, limit, where, doc } from "firebase/firestore";
 import { db } from "../../config/firebase/firebase";
 import categories from "../../assets/categories";
 
@@ -14,11 +14,18 @@ function useTransactions(max = null) {
 			setTransactionsLoading(true);
 
 			try {
-				const transactionsRef = collection(db, `users/${user.uid}/transactions`);
+				const transactionsRef = collection(db, "transactions");
+				const userRef = doc(db, "users", user.uid);
 
 				let q;
-				if (max !== null) q = query(transactionsRef, orderBy("date", "desc"), limit(max));
-				else q = query(transactionsRef, orderBy("date", "desc"));
+				if (max !== null)
+					q = query(
+						transactionsRef,
+						where("user", "==", userRef),
+						orderBy("date", "asc"),
+						limit(max)
+					);
+				else q = query(transactionsRef, where("user", "==", userRef), orderBy("date", "asc"));
 
 				const res = await getDocs(q);
 
@@ -50,7 +57,7 @@ function useTransactions(max = null) {
 		if (user == null) return;
 
 		fetchUserTransactions();
-	}, [user, limit]);
+	}, [user, max]);
 
 	return { transactions, transactionsLoading };
 }

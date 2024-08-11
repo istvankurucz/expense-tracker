@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { useStateValue } from "../../contexts/Context API/StateProvider";
 import useTransactions from "../../hooks/transaction/useTransactions";
 import { Link } from "react-router-dom";
@@ -243,9 +243,8 @@ function Home() {
 					) : (
 						<div className="home__transactions__container">
 							{transactions.map((transaction, i) => (
-								<>
+								<Fragment key={transaction.id}>
 									<Transaction
-										key={transaction.id}
 										category={transaction.category}
 										type={transaction.type}
 										date={transaction.date.toLocaleDateString().replaceAll(" ", "")}
@@ -258,7 +257,7 @@ function Home() {
 									{i !== transactions.length - 1 && (
 										<hr className="home__transactions__divider" />
 									)}
-								</>
+								</Fragment>
 							))}
 						</div>
 					)}

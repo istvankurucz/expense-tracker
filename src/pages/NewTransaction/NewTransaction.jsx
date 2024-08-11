@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useStateValue } from "../../contexts/Context API/StateProvider";
-import { Timestamp, addDoc, collection } from "firebase/firestore";
+import { Timestamp, addDoc, collection, doc } from "firebase/firestore";
 import { db } from "../../config/firebase/firebase";
 import SwitchSelect from "../../components/form/SwitchSelect/SwitchSelect";
 import Page from "../../components/layout/Page/Page";
@@ -16,8 +16,8 @@ import Spinner from "../../components/ui/Spinner/Spinner";
 import disableSubmitButton from "../../utils/form/disableSubmitButton";
 import enableSubmitButton from "../../utils/form/enableSubmitButton";
 import UserLoadingFrame from "../../components/layout/LoadingFrame/UserLoadingFrame/UserLoadingFrame";
-import "./NewTransaction.css";
 import FormButtons from "../../components/layout/FormButtons/FormButtons";
+import "./NewTransaction.css";
 
 const typeSelectItems = [
 	{
@@ -80,15 +80,17 @@ function NewTransaction() {
 
 		try {
 			// 2. Save the transaction
-			const transactionsRef = collection(db, `users/${user.uid}/transactions`);
+			const userRef = doc(db, "users", user.uid);
+			const transactionsRef = collection(db, "transactions");
 			await addDoc(transactionsRef, {
+				group: formData.group,
+				user: userRef,
 				type: formData.type,
 				category: formData.category,
 				name: formData.name,
 				date: Timestamp.fromDate(formData.date),
 				amount: formData.amount,
 				comment: formData.comment,
-				group: formData.group,
 			});
 
 			// Enable submit button

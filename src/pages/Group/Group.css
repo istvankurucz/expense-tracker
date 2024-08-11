@@ -1,3 +1,7 @@
-#groupLoading {
-	text-align: center;
+.group__container {
+	display: flex;
+}
+
+.group__body {
+	flex: 1;
 }

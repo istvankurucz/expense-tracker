@@ -15,8 +15,8 @@ import Button from "../../ui/Button/Button";
 import HeaderSidebar from "./HeaderSidebar/HeaderSidebar";
 import HeaderActionButton from "./HeaderActionButton/HeaderActionButton";
 import HeaderAuthButton from "./HeaderAuthButton/HeaderAuthButton";
-import "./Header.css";
 import IconLink from "../../ui/IconLink/IconLink";
+import "./Header.css";
 
 function Header() {
 	// States
@@ -86,12 +86,11 @@ function Header() {
 					</nav>
 
 					<Button
-						variant="secondary"
+						variant="info"
 						outlined
 						icon
 						className="header__hamburger"
-						onClick={() => setShowSidebar((show) => !show)}
-					>
+						onClick={() => setShowSidebar((show) => !show)}>
 						<FontAwesomeIcon icon={faBars} />
 					</Button>
 				</div>
