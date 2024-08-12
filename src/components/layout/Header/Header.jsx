@@ -26,7 +26,7 @@ function Header() {
 
 	return (
 		<header className="header">
-			<Header.Sidebar show={showSidebar} setShow={setShowSidebar} />
+			<Header.Sidebar show={showSidebar} setShow={setShowSidebar} groups={groups} />
 
 			<Container className="header__container">
 				<Brand />

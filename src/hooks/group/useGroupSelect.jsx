@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import useGroups from "./useGroups";
+import { useStateValue } from "../../contexts/Context API/StateProvider";
 
 const noGroup = {
 	id: "no-group",
@@ -9,6 +10,7 @@ const noGroup = {
 
 function useGroupSelect() {
 	// States
+	const [, dispatch] = useStateValue();
 	const { groups } = useGroups();
 	const [searchParams] = useSearchParams();
 	const [groupSelectItems, setGroupSelectItems] = useState([noGroup]);
@@ -62,7 +64,18 @@ function useGroupSelect() {
 
 		// Set the default index
 		setIndex(getDefaultGroupIndex());
-	}, [groupId, checkValidGroupId, getGroupSelectItems, getDefaultGroupIndex]);
+
+		// Show feedback that the group has been selected automatically
+		dispatch({
+			type: "SET_FEEDBACK",
+			feedback: {
+				show: true,
+				type: "info",
+				message: "A csoport automatikusan beállításra került.",
+				details: "Ha szeretnéd módosíthatod a lap alján.",
+			},
+		});
+	}, [groupId, checkValidGroupId, getGroupSelectItems, getDefaultGroupIndex, dispatch]);
 
 	return { groupSelectItems, index, setIndex };
 }

@@ -19,7 +19,7 @@
 
 /* #region Variants */
 .feedback--info {
-	--_text-color: var(--primary-color);
+	--_text-color: var(--text-color);
 	--bg-color: var(--info-color);
 }
 

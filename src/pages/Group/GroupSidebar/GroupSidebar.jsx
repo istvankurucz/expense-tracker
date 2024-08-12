@@ -9,9 +9,11 @@ import {
 	faRectangleList,
 } from "@fortawesome/free-solid-svg-icons";
 import Button from "../../../components/ui/Button/Button";
+import useCloseSidebar from "../../../hooks/dom/useCloseSidebar";
 import "./GroupSidebar.css";
 
 function GroupSidebar({ show, setShow }) {
+	useCloseSidebar(setShow);
 	const { group } = useGroupContext();
 
 	return (

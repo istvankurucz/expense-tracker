@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useStateValue } from "../../contexts/Context API/StateProvider";
 import { Timestamp, addDoc, collection, doc } from "firebase/firestore";
@@ -55,10 +55,7 @@ function NewTransaction() {
 	);
 	const defaultDate = new Date().toLocaleDateString().replaceAll(".", "").replaceAll(" ", "-");
 
-	useEffect(() => {}, []);
-
 	// Functions
-
 	function getFormData() {
 		const type = typeSelectItems[typeIndex].type;
 		const category = validCategories[categoryIndex].name;
