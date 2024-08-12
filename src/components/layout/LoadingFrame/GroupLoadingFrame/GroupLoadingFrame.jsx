@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { useGroupContext } from "../../../../contexts/group/GroupContext";
 import { useStateValue } from "../../../../contexts/Context API/StateProvider";
 import LoadingFrame from "../LoadingFrame";
-import UserLoading from "../../../ui/UserLoading/UserLoading";
+import GroupLoading from "../../../../pages/Group/GroupLoading/GroupLoading";
 import NoAccessToGroup from "../../Section/NoAccessToGroup/NoAccessToGroup";
 import "./GroupLoadingFrame.css";
 
@@ -15,7 +15,7 @@ function GroupLoadingFrame({ children }) {
 	return (
 		<LoadingFrame
 			loading={groupLoading || userLoading}
-			loadingElement={<UserLoading />}
+			loadingElement={<GroupLoading />}
 			error={group == null && !groupLoading}
 			errorElement={<NoAccessToGroup />}>
 			{children}

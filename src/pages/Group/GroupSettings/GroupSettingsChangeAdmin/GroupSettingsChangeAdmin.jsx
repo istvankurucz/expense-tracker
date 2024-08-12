@@ -50,6 +50,25 @@ function GroupSettingsChangeAdmin({ show, setShow }) {
 		// 1. Disable submit button
 		disableSubmitButton(submitButtonRef, setLoading);
 
+		// 2. Check is there is other option
+		if (newAdminList.length === 0) {
+			dispatch({
+				type: "SET_FEEDBACK",
+				feedback: {
+					show: true,
+					type: "error",
+					message:
+						"Csak te vagy a csoport tagja, így nem jelölhetsz ki magad helyett más admint.",
+					details: "",
+				},
+			});
+
+			// Enable submit button
+			enableSubmitButton(submitButtonRef, setLoading);
+
+			return;
+		}
+
 		// 2. Create the new roles
 		const newRoles = setNewRoles(group.roles);
 		console.log("New roles:", newRoles);
