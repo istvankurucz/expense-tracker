@@ -13,11 +13,6 @@
 	font-size: var(--fs-s);
 }
 
-.home__transactions__loading {
-	text-align: center;
-	padding-block: 3rem;
-}
-
 .home__transactions__container {
 	position: relative;
 }

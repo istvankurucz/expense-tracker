@@ -129,7 +129,8 @@ function GroupSettings() {
 						{group?.isAdmin && (
 							<button
 								className="groupSettings__data__row__action"
-								onClick={() => setShowChangeNameModal(true)}>
+								onClick={() => setShowChangeNameModal(true)}
+							>
 								Megváltoztatás
 							</button>
 						)}
@@ -140,7 +141,8 @@ function GroupSettings() {
 						{group?.isAdmin && (
 							<button
 								className="groupSettings__data__row__action"
-								onClick={generateNewJoinCode}>
+								onClick={generateNewJoinCode}
+							>
 								Megváltoztatás
 							</button>
 						)}
@@ -150,7 +152,8 @@ function GroupSettings() {
 						<span className="groupSetting__data__row__value">{group?.members.length}</span>
 						<button
 							className="groupSettings__data__row__action"
-							onClick={() => setShowMembersModal(true)}>
+							onClick={() => setShowMembersModal(true)}
+						>
 							Megtekintés
 						</button>
 					</div>
@@ -160,7 +163,8 @@ function GroupSettings() {
 						{group?.isAdmin && (
 							<button
 								className="groupSettings__data__row__action"
-								onClick={() => setShowChangeAdminModal(true)}>
+								onClick={() => setShowChangeAdminModal(true)}
+							>
 								Megváltoztatás
 							</button>
 						)}

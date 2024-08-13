@@ -1,20 +1,22 @@
 import PropTypes from "prop-types";
 import ChartBar from "./ChartBar/ChartBar";
 import ChartPie from "./ChartPie/ChartPie";
+import ChartLoading from "../Loading/ChartLoading/ChartLoading";
 import "./Chart.css";
 
 function Chart({
 	type,
 	justify = "center",
 	size = "16rem",
-	offset = "3rem",
+	offset = "1.5rem",
 	legend = [],
 	children,
 }) {
 	return (
 		<div
 			style={{ "--justify": justify, "--size": size, "--offset": offset }}
-			className={`chart chart--${type} scrollbar`}>
+			className={`chart chart--${type} scrollbar`}
+		>
 			<div className={`chart__container chart__container--${type}`}>{children}</div>
 
 			{legend.length > 0 && (
@@ -23,7 +25,8 @@ function Chart({
 						<li key={i} className="chart__legend__item">
 							<span
 								style={{ "--color": item.color }}
-								className="chart__legend__color"></span>
+								className="chart__legend__color"
+							></span>
 							<span className="chart__legend__text">{item.text}</span>
 						</li>
 					))}
@@ -46,5 +49,6 @@ Chart.propTypes = {
 
 Chart.Bar = ChartBar;
 Chart.Pie = ChartPie;
+Chart.Loading = ChartLoading;
 
 export default Chart;

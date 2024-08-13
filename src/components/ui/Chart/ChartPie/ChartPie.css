@@ -22,6 +22,7 @@
 	--x: calc((var(--size) / 2 + var(--offset)) * sin(var(--from-degree) + var(--degree) / 2));
 	--y: calc(-1 * (var(--size) / 2 + var(--offset)) * cos(var(--from-degree) + var(--degree) / 2));
 
+	text-transform: capitalize;
 	text-align: center;
 	background-color: var(--primary-color);
 	border: 0.1rem solid var(--color);

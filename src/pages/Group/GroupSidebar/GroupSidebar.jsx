@@ -23,7 +23,7 @@ function GroupSidebar({ show, setShow }) {
 			<nav className="groupSidebar__nav">
 				<ul className="groupSidebar__menu">
 					<li className="groupSidebar__menu__item">
-						<Link to="">
+						<Link to={`/groups/${group.id}/overview`}>
 							<FontAwesomeIcon icon={faInfo} />
 							Áttekintés
 						</Link>
@@ -53,7 +53,8 @@ function GroupSidebar({ show, setShow }) {
 				variant="info"
 				title="Menü"
 				className="groupSidebar__button"
-				onClick={() => setShow((show) => !show)}>
+				onClick={() => setShow((show) => !show)}
+			>
 				<FontAwesomeIcon icon={faAngleDoubleRight} />
 			</Button>
 		</aside>

@@ -13,12 +13,13 @@
 .chart__container--bar {
 	display: flex;
 	gap: 2rem;
+	margin-top: 1rem;
 }
 
 .chart__container--pie {
 	width: var(--size, 16rem);
 	height: var(--size, 16rem);
-	margin-block: calc(var(--offset, 0) * 2);
+	margin-block: max(calc(var(--offset, 0) * 2), 0rem);
 	position: relative;
 }
 /* #endregion */
@@ -34,6 +35,7 @@
 .chart__legend__item {
 	display: flex;
 	gap: 0.5rem;
+	text-transform: capitalize;
 	align-items: center;
 }
 

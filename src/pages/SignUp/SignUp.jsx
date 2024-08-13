@@ -13,6 +13,7 @@ import Checkbox from "../../components/form/Checkbox/Checkbox";
 import disableSubmitButton from "../../utils/form/disableSubmitButton";
 import enableSubmitButton from "../../utils/form/enableSubmitButton";
 import "./SignUp.css";
+import createUserInDb from "../../utils/user/createUserInDb";
 
 function SignUp() {
 	// States
@@ -64,24 +65,6 @@ function SignUp() {
 			return {
 				ok: true,
 				user,
-			};
-		} catch (e) {
-			return {
-				ok: false,
-				error: e.code,
-			};
-		}
-	}
-
-	async function createUserDb(user) {
-		try {
-			const userRef = doc(db, "users", user.uid);
-			await setDoc(userRef, {
-				name: user.displayName,
-			});
-
-			return {
-				ok: true,
 			};
 		} catch (e) {
 			return {
@@ -159,7 +142,7 @@ function SignUp() {
 			if (!responseAuth.ok) throw new Error(responseAuth.error);
 
 			// 5. Create the user in Firestore
-			const responseDb = await createUserDb(responseAuth.user);
+			const responseDb = await createUserInDb(responseAuth.user);
 			if (!responseDb.ok) throw new Error(responseDb.error);
 
 			// 6. Enable submit button again

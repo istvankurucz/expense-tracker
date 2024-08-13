@@ -5,6 +5,7 @@ import Page from "../../components/layout/Page/Page";
 import Container from "../../components/layout/Container/Container";
 import GroupSidebar from "./GroupSidebar/GroupSidebar";
 import GroupSettings from "./GroupSettings/GroupSettings";
+import GroupOverview from "./GroupOverview/GroupOverview";
 import "./Group.css";
 
 function Group() {
@@ -27,6 +28,7 @@ function Group() {
 }
 
 Group.Sidebar = GroupSidebar;
+Group.Overview = GroupOverview;
 Group.Settings = GroupSettings;
 
 export default Group;

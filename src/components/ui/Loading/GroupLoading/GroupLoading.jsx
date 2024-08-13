@@ -1,6 +1,6 @@
-import Overlay from "../../../components/layout/Overlay/Overlay";
-import Spinner from "../../../components/ui/Spinner/Spinner";
-import { useGroupContext } from "../../../contexts/group/GroupContext";
+import { useGroupContext } from "../../../../contexts/group/GroupContext";
+import Overlay from "../../../layout/Overlay/Overlay";
+import Spinner from "../../Spinner/Spinner";
 
 function GroupLoading() {
 	const { groupLoading } = useGroupContext();

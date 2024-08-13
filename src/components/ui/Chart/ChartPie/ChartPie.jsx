@@ -9,7 +9,8 @@ function ChartPie({ color, fromDegree, degree, showCaption = true, name = "", va
 				"--degree": `${degree}deg`,
 				"--color": color,
 			}}
-			className={`chartPie chartPie--${color}`}>
+			className={`chartPie chartPie--${color}`}
+		>
 			{showCaption && (
 				<div className="chartPie__info">
 					{name !== "" && <div className="chartPie__name">{name}</div>}

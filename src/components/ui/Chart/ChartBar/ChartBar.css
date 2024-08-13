@@ -1,6 +1,5 @@
 .chartBar {
 	padding-top: 1.5rem;
-	cursor: pointer;
 }
 
 .chartBar__bar {
@@ -32,10 +31,6 @@
 	position: absolute;
 	inset: 0;
 	top: calc(100% - var(--bar-height));
-	transition: scale 200ms ease;
-}
-.chartBar:hover .chartBar__bar::after {
-	scale: 1.05;
 }
 
 .chartBar--animate .chartBar__bar::after {

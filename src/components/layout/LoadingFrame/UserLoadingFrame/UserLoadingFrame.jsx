@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { useStateValue } from "../../../../contexts/Context API/StateProvider";
-import UserLoading from "../../../ui/UserLoading/UserLoading";
 import NoUser from "../../Section/NoUser/NoUser";
+import UserLoading from "../../../ui/Loading/UserLoading/UserLoading";
 import LoadingFrame from "../LoadingFrame";
 import "./UserLoadingFrame.css";
 

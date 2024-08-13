@@ -3,6 +3,7 @@ import { useStateValue } from "../../contexts/Context API/StateProvider";
 import { collection, getDocs, orderBy, query, limit, where, doc, getDoc } from "firebase/firestore";
 import { db } from "../../config/firebase/firebase";
 import categories from "../../assets/categories";
+import findTransactionCategory from "../../utils/transaction/findTransactionCategory";
 
 function useTransactions(max = null) {
 	const [{ user }] = useStateValue();
@@ -48,9 +49,7 @@ function useTransactions(max = null) {
 
 						return {
 							id: transaction.id,
-							category: categories.find(
-								(category) => category.name === transaction.data().category
-							),
+							category: findTransactionCategory(transaction.data().category),
 							type: transaction.data().type,
 							date: new Date(transaction.data().date.seconds * 1000),
 							group: groupData,

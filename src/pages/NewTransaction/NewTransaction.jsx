@@ -182,18 +182,20 @@ function NewTransaction() {
 						</div>
 					</Section>
 
-					<Section maxWidth={maxWidth} variant="secondary" id="newTransactionSelectGroup">
-						<Section.Title>Csoport megadása</Section.Title>
+					{typeIndex === 0 && (
+						<Section maxWidth={maxWidth} variant="secondary" id="newTransactionSelectGroup">
+							<Section.Title>Csoport megadása</Section.Title>
 
-						<Select
-							label="Csoport"
-							id="newTransactionGroup"
-							items={groupSelectItems.map((item) => item.name)}
-							index={index}
-							setIndex={setIndex}
-							required
-						/>
-					</Section>
+							<Select
+								label="Csoport"
+								id="newTransactionGroup"
+								items={groupSelectItems.map((item) => item.name)}
+								index={index}
+								setIndex={setIndex}
+								required
+							/>
+						</Section>
+					)}
 
 					<Section maxWidth={maxWidth} id="newTransactionSubmit">
 						<FormButtons>

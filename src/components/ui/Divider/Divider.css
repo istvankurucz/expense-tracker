@@ -1,0 +1,41 @@
+.divider {
+	--my: 0.5rem;
+
+	height: 1px;
+	width: 100%;
+	color: var(--info-color);
+	background-color: var(--color);
+	margin-block: var(--my);
+	position: relative;
+}
+.divider::after {
+	content: attr(data-text);
+	font-size: var(--fs-s);
+	background-color: var(--primary-color);
+	padding-inline: 0.5rem;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	translate: -50% -50%;
+}
+
+/* #region Variants */
+.divider--primary {
+	--color: var(--primary-color);
+}
+.divider--secondary {
+	--color: var(--secondary-color);
+}
+.divider--accent {
+	--color: var(--accent-color);
+}
+.divider--info {
+	--color: var(--info-color);
+}
+.divider--success {
+	--color: var(--success-color);
+}
+.divider--danger {
+	--color: var(--danger-color);
+}
+/* #endregion */

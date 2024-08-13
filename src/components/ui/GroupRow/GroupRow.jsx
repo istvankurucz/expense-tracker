@@ -10,7 +10,7 @@ function GroupRow({ id, name, isAdmin, className = "" }) {
 	return (
 		<ShadowBox>
 			<Link
-				to={`/groups/${id}`}
+				to={`/groups/${id}/overview`}
 				className={`groupRow${className !== "" ? ` ${className}` : ""}`}
 			>
 				<span className="groupRow__name">{name}</span>

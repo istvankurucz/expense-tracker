@@ -1,4 +1,4 @@
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import SignIn from "./pages/SignIn/SignIn";
 import SignUp from "./pages/SignUp/SignUp";
@@ -49,7 +49,10 @@ function App() {
 				<Route path="/join-group" element={renderWithHeaderAndFooter(<JoinGroup />)} />
 				<Route
 					path="/groups/:groupId"
-					element={<GroupProvider>{renderWithHeaderAndFooter(<Group />)}</GroupProvider>}>
+					element={<GroupProvider>{renderWithHeaderAndFooter(<Group />)}</GroupProvider>}
+				>
+					<Route index element={<Navigate to="overview" replace />} />
+					<Route path="overview" element={<Group.Overview />} />
 					<Route path="settings" element={<Group.Settings />} />
 				</Route>
 

@@ -1,8 +1,10 @@
 import { useRef, useState } from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../config/firebase/firebase";
+import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { auth, googleProvider } from "../../config/firebase/firebase";
 import { useNavigate } from "react-router-dom";
 import { useStateValue } from "../../contexts/Context API/StateProvider";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 import Auth from "../../components/layout/Auth/Auth";
 import Modal from "../../components/layout/Modal/Modal";
 import Input from "../../components/form/Input/Input";
@@ -10,16 +12,21 @@ import Button from "../../components/ui/Button/Button";
 import Spinner from "../../components/ui/Spinner/Spinner";
 import disableSubmitButton from "../../utils/form/disableSubmitButton";
 import enableSubmitButton from "../../utils/form/enableSubmitButton";
+import Divider from "../../components/ui/Divider/Divider";
+import createUserInDb from "../../utils/user/createUserInDb";
+import checkIfNewUser from "../../utils/user/checkIfNewUser";
 import "./SignIn.css";
 
 function SignIn() {
 	// States
 	const [, dispatch] = useStateValue();
-	const [loading, setLoading] = useState(false);
+	const [googleLoading, setGoogleLoading] = useState(false);
+	const [submitLoading, setSubmitLoading] = useState(false);
 
 	// Refs
 	const emailRef = useRef();
 	const passwordRef = useRef();
+	const googleButtonRef = useRef();
 	const submitButtonRef = useRef();
 
 	const navigate = useNavigate();
@@ -45,7 +52,7 @@ function SignIn() {
 		e.preventDefault();
 
 		// 1. Disable submit button
-		disableSubmitButton(submitButtonRef, setLoading);
+		disableSubmitButton(submitButtonRef, setSubmitLoading);
 
 		// 2. Get form data
 		const email = emailRef.current.value;
@@ -57,7 +64,7 @@ function SignIn() {
 			await signInWithEmailAndPassword(auth, email, password);
 
 			// 4. Enable submit button
-			enableSubmitButton(submitButtonRef, setLoading);
+			enableSubmitButton(submitButtonRef, setSubmitLoading);
 
 			// 5. Redirect to home page
 			navigate("/");
@@ -76,7 +83,35 @@ function SignIn() {
 			});
 
 			// Enable submit button
-			enableSubmitButton(submitButtonRef, setLoading);
+			enableSubmitButton(submitButtonRef, setSubmitLoading);
+		}
+	}
+
+	async function signInUserWithGoogle() {
+		// Disable the Google button
+		disableSubmitButton(googleButtonRef, setGoogleLoading);
+
+		try {
+			// Create the user in Firebase auth
+			const { user } = await signInWithPopup(auth, googleProvider);
+
+			// Check if the user is new
+			if (checkIfNewUser(user)) {
+				// Create the user in Firestore
+				const responseDb = await createUserInDb(user);
+				if (!responseDb.ok) throw new Error(responseDb.error);
+			}
+
+			// Enable Google button
+			enableSubmitButton(googleButtonRef, setGoogleLoading);
+
+			// Redirect to home page
+			navigate("/");
+		} catch (e) {
+			console.log("Error signing in the user with Google.", e);
+
+			// Enable Google button
+			enableSubmitButton(googleButtonRef, setGoogleLoading);
 		}
 	}
 
@@ -113,7 +148,17 @@ function SignIn() {
 							<Auth.Link to="/password-reset">Új jelszó</Auth.Link>
 						</Auth.Text>
 
-						<hr className="signin__divider" />
+						<Divider text="További lehetőségek" my="0.75rem" />
+
+						{/* <Auth.Text centered>További lehetőségek</Auth.Text> */}
+						<Button outlined centered onClick={signInUserWithGoogle} ref={googleButtonRef}>
+							{googleLoading && <Spinner variant="primary" />}
+							<FontAwesomeIcon icon={faGoogle} />
+							Google
+						</Button>
+
+						{/* <hr className="signin__divider" /> */}
+						<Divider my="0.25rem" />
 
 						<Auth.Text centered>
 							Még nincs fiókod?
@@ -128,7 +173,7 @@ function SignIn() {
 							Mégse
 						</Button>
 						<Button type="submit" ref={submitButtonRef}>
-							{loading ? (
+							{submitLoading ? (
 								<Spinner variant="primary" text="Bejelentkezés" />
 							) : (
 								"Bejelentkezés"

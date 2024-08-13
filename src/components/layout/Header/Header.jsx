@@ -57,7 +57,9 @@ function Header() {
 											</li>
 										))
 									) : (
-										<li>Nincs csoport</li>
+										<li>
+											<Link to="/groups">Nincs csoport</Link>
+										</li>
 									)}
 									<hr className="header__submenu__divider" />
 									<li className="header__menu__item--accent">
@@ -92,7 +94,8 @@ function Header() {
 						outlined
 						icon
 						className="header__hamburger"
-						onClick={() => setShowSidebar((show) => !show)}>
+						onClick={() => setShowSidebar((show) => !show)}
+					>
 						<FontAwesomeIcon icon={faBars} />
 					</Button>
 				</div>

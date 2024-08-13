@@ -1,6 +1,6 @@
-import { useStateValue } from "../../../contexts/Context API/StateProvider";
-import Overlay from "../../layout/Overlay/Overlay";
-import Spinner from "../Spinner/Spinner";
+import { useStateValue } from "../../../../contexts/Context API/StateProvider";
+import Overlay from "../../../layout/Overlay/Overlay";
+import Spinner from "../../Spinner/Spinner";
 import "./UserLoading.css";
 
 function UserLoading() {
