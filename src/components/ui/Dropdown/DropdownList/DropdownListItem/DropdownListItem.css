@@ -1,0 +1,9 @@
+.dropdownListItem {
+	background-color: var(--primary-color);
+	padding: 0.5rem 1rem;
+	transition: background-color 200ms ease;
+	cursor: pointer;
+}
+.dropdownListItem:hover {
+	background-color: var(--secondary-color);
+}

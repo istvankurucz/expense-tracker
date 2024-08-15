@@ -1,0 +1,72 @@
+.transactionsTable__container {
+	overflow-x: auto;
+	padding-inline: 0.25rem;
+}
+
+.transactions__table {
+	--border: 0.1rem solid var(--info-color);
+
+	min-width: 100%;
+	border-collapse: collapse;
+}
+
+.transactions__table thead {
+	border-bottom: var(--border);
+}
+
+.transactions__table thead th {
+	font-weight: 500;
+	padding-block: 0.25rem;
+}
+
+.transactions__table tbody tr:not(:last-child) {
+	border-bottom: var(--border);
+}
+
+.transactions__table tbody tr td {
+	padding: 0.5rem 1rem;
+}
+
+.transactionsTable__categoryIcon {
+	max-width: 3rem;
+	padding-left: 0.25rem !important;
+}
+
+.transactionsTable__categoryText {
+	padding-left: 0rem !important;
+}
+.transactionsTable__categoryText::first-letter {
+	text-transform: uppercase;
+}
+
+.transactionsTable__name {
+	min-width: 12rem;
+	padding-left: 1.5rem !important;
+}
+.transactionsTable__name::first-letter {
+	text-transform: uppercase;
+}
+
+.transactionsTable__comment {
+	min-width: 8rem;
+}
+
+.transactionsTable__ref {
+	min-width: 10rem;
+	text-align: center;
+}
+
+.transactionsTable__amount {
+	font-weight: 500;
+	text-align: right;
+	color: var(--color);
+	padding-right: 0.25rem !important;
+}
+/* #region Variants */
+.transactionsTable__amount--expense {
+	--color: var(--danger-color);
+}
+.transactionsTable__amount--income {
+	--color: var(--success-color);
+}
+/* #endregion */

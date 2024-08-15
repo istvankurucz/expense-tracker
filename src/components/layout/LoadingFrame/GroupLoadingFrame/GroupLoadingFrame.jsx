@@ -10,8 +10,6 @@ function GroupLoadingFrame({ children }) {
 	const [{ userLoading }] = useStateValue();
 	const { group, groupLoading } = useGroupContext();
 
-	// console.log("Error:", (!groupLoading && user == null) || (group == null && !groupLoading));
-
 	return (
 		<LoadingFrame
 			loading={groupLoading || userLoading}

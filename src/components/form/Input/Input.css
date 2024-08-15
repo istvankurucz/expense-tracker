@@ -39,6 +39,10 @@
 	display: flex;
 	margin-inline: auto;
 }
+
+.input--round .input__main {
+	border-radius: var(--br-pill);
+}
 /* #endregion */
 
 .input__label {

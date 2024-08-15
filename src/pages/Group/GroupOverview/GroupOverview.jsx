@@ -1,13 +1,13 @@
 import Page from "../../../components/layout/Page/Page";
 import Section from "../../../components/layout/Section/Section";
 import GroupOverviewBalanceSection from "./GroupOverviewBalanceSection/GroupOverviewBalanceSection";
-import useGroupTransactions from "../../../hooks/transaction/useGroupTransactions";
 import GroupOverviewCategoriesSection from "./GroupOverviewCategoriesSection/GroupOverviewCategoriesSection";
 import LastTransactionsSection from "../../../components/layout/Section/LastTransactionsSection/LastTransactionsSection";
+import useTransactions from "../../../hooks/transaction/useTransactions";
 import "./GroupOverview.css";
 
 function GroupOverview() {
-	const { transactions, transactionsLoading } = useGroupTransactions();
+	const { transactions, transactionsLoading } = useTransactions();
 
 	return (
 		<>

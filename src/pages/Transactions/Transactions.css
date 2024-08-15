@@ -1,0 +1,38 @@
+.transactions__table__buttons {
+	display: flex;
+	gap: 7.5rem;
+	align-items: stretch;
+}
+
+.transactions__search {
+	flex: 1;
+}
+
+.transactions__table__buttons__right {
+	display: inline-flex;
+	gap: 1.5rem;
+	justify-content: flex-end;
+}
+
+.transactions__table__loading {
+	text-align: center;
+	padding-block: 3rem;
+}
+
+@media screen and (max-width: 992px) {
+	.transactions__table__buttons {
+		flex-wrap: wrap;
+		gap: 2rem;
+		justify-content: flex-end;
+	}
+
+	.transactions__table__buttons__right {
+		flex-wrap: wrap;
+	}
+}
+
+@media screen and (max-width: 576px) {
+	.transactions__table__buttons {
+		justify-content: flex-start;
+	}
+}

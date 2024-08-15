@@ -3,7 +3,6 @@ import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faComment } from "@fortawesome/free-solid-svg-icons";
-import { useStateValue } from "../../../contexts/Context API/StateProvider";
 import CategoryIcon from "../CategoryIcon/CategoryIcon";
 import formatPrice from "../../../utils/format/formatPrice";
 import Tooltip from "../Tooltip/Tooltip";
@@ -21,7 +20,7 @@ function Transaction({ category, type, date, group, user, name, amount, comment 
 	const showGroup = group != null || !hasGroupId;
 
 	return (
-		<div className={`transaction transaction--${type} transaction--${category}`}>
+		<div className={`transaction transaction--${type}`}>
 			<CategoryIcon category={category} />
 
 			<span className="transaction__date">{date}</span>
@@ -29,8 +28,8 @@ function Transaction({ category, type, date, group, user, name, amount, comment 
 			<div className="transaction__body">
 				<div className="transaction__body__top">
 					{showGroup && (
-						<Link to={`/groups/${group.id}`} className="transaction__group">
-							{group.name}
+						<Link to={`/groups/${group?.id}`} className="transaction__group">
+							{group?.name}
 						</Link>
 					)}
 					{showGroup && showUser && " - "}

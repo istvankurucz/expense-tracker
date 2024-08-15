@@ -1,0 +1,14 @@
+.dropdownList {
+	display: none;
+	list-style: none;
+	background-color: var(--primary-color);
+	border-radius: var(--br);
+	box-shadow: 0.1rem 0.1rem 0.5rem var(--info-color);
+	padding-block: 0.5rem;
+	position: absolute;
+	top: calc(100% + 0.25rem);
+	right: 0;
+}
+.dropdownList--show {
+	display: block;
+}

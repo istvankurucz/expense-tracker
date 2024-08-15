@@ -2,6 +2,7 @@
 	display: flex;
 	gap: 2rem;
 	align-items: center;
+	background-color: var(--primary-color);
 	padding-block: 0.5rem;
 }
 /* #region Types */
@@ -45,6 +46,9 @@
 	max-height: 3.5rem;
 	overflow: hidden;
 	text-overflow: ellipsis;
+}
+.transaction__name__text::first-letter {
+	text-transform: uppercase;
 }
 
 .transaction__comment {
