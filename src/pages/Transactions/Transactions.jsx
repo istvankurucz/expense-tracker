@@ -1,16 +1,16 @@
+import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFilter, faTable } from "@fortawesome/free-solid-svg-icons";
 import UserLoadingFrame from "../../components/layout/LoadingFrame/UserLoadingFrame/UserLoadingFrame";
 import Page from "../../components/layout/Page/Page";
 import Section from "../../components/layout/Section/Section";
 import TransactionsTable from "../../components/layout/TransactionsTable/TransactionsTable";
-import Button from "../../components/ui/Button/Button";
 import useTransactions from "../../hooks/transaction/useTransactions";
-import { faFilter, faSort } from "@fortawesome/free-solid-svg-icons";
+import Button from "../../components/ui/Button/Button";
 import Spinner from "../../components/ui/Spinner/Spinner";
 import TransactionsColumns from "./TransactionsColumns/TransactionsColumns";
-import "./Transactions.css";
-import { useState } from "react";
 import Input from "../../components/form/Input/Input";
+import "./Transactions.css";
 
 const cols = [
 	{
@@ -59,8 +59,8 @@ function Transactions() {
 					<Page.Title>Tranzakciók</Page.Title>
 				</Section>
 
-				<Section variant="secondary" id="transactionsButtons">
-					<div className="transactions__table__buttons">
+				<Section variant="secondary" id="transactionsSettings">
+					<div className="transactions__settings">
 						<Input
 							type="search"
 							placeholder="Keresés..."
@@ -69,10 +69,15 @@ function Transactions() {
 							className="transactions__search"
 						/>
 
-						<div className="transactions__table__buttons__right">
-							<Button variant="info" round>
+						<div className="transactions__settings__right">
+							<Button variant="info" round title="Szűrés">
 								<FontAwesomeIcon icon={faFilter} />
-								Szűrés
+								<span className="transactions__settings__button__text">Szűrés</span>
+							</Button>
+
+							<Button variant="secondary" round title="Nézet">
+								<FontAwesomeIcon icon={faTable} />
+								<span className="transactions__settings__button__text">Nézet</span>
 							</Button>
 
 							<Transactions.Columns
@@ -80,11 +85,6 @@ function Transactions() {
 								visibleCols={visibleCols}
 								setVisibleCols={setVisibleCols}
 							/>
-
-							<Button variant="secondary" round>
-								<FontAwesomeIcon icon={faSort} />
-								Rendezés
-							</Button>
 						</div>
 					</div>
 				</Section>

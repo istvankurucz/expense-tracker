@@ -17,8 +17,20 @@
 .transactions__table thead th {
 	font-weight: 500;
 	padding-block: 0.25rem;
+	user-select: none;
+	cursor: pointer;
 }
 
+.transactions__table__th {
+	display: flex;
+	gap: 0.5rem;
+	justify-content: center;
+	align-items: center;
+}
+
+.transactions__table tbody tr:hover {
+	background-color: var(--secondary-color);
+}
 .transactions__table tbody tr:not(:last-child) {
 	border-bottom: var(--border);
 }

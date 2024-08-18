@@ -2,13 +2,14 @@ import PropTypes from "prop-types";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
-import handleSelectBlur from "../../../utils/form/handleSelectBlur";
-import "./Select.css";
 import RequiredIcon from "../RequiredIcon/RequiredIcon";
+import useCloseSelectOptions from "../../../hooks/dom/useCloseSelectOptions";
+import "./Select.css";
 
 function Select({ label, id, items, index, setIndex, required, className = "" }) {
 	// States
 	const [showOptions, setShowOptions] = useState(false);
+	useCloseSelectOptions(showOptions, setShowOptions);
 
 	return (
 		<div className={`select${className !== "" ? ` ${className}` : ""}`}>
@@ -17,12 +18,7 @@ function Select({ label, id, items, index, setIndex, required, className = "" })
 				{required && <RequiredIcon />}
 			</label>
 
-			<button
-				type="button"
-				className="select__selected"
-				onFocus={() => setShowOptions(true)}
-				onBlur={() => handleSelectBlur(setShowOptions)}
-			>
+			<button type="button" className="select__selected" onFocus={() => setShowOptions(true)}>
 				{items[index]}
 				<FontAwesomeIcon icon={faAngleDown} />
 			</button>
@@ -40,11 +36,12 @@ function Select({ label, id, items, index, setIndex, required, className = "" })
 	);
 }
 
-Select.proptypes = {
+Select.propTypes = {
+	label: PropTypes.string,
+	id: PropTypes.string.isRequired,
 	items: PropTypes.array.isRequired,
 	index: PropTypes.number.isRequired,
 	setIndex: PropTypes.func.isRequired,
-	id: PropTypes.string.isRequired,
 	required: PropTypes.bool,
 	className: PropTypes.string,
 };

@@ -1,10 +1,99 @@
 import PropTypes from "prop-types";
+import { Fragment, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
 import CategoryIcon from "../../ui/CategoryIcon/CategoryIcon";
 import formatPrice from "../../../utils/format/formatPrice";
 import "./TransactionsTable.css";
-import { Fragment } from "react";
 
 function TransactionsTable({ cols = [], transactions = [], isGroupTransactions, className = "" }) {
+	// States
+	const [sorting, setSorting] = useState({ property: "amount", direction: "desc" });
+
+	// console.log("Transactions:", transactions);
+
+	// Variables
+	const orderedTransactions = transactions.toSorted(
+		sortByProperty(sorting.property, sorting.direction)
+	);
+	// console.log("Ordered:", orderedTransactions);
+
+	// Functions
+	function getThText(col) {
+		if (col.name === "ref") {
+			if (isGroupTransactions) return "Tag";
+			else return "Csoport";
+		} else return col.text;
+	}
+
+	function getThContent(col) {
+		const text = getThText(col);
+
+		return (
+			<div className="transactions__table__th">
+				{text}
+				{col.name === sorting.property && (
+					<FontAwesomeIcon icon={sorting.direction === "asc" ? faCaretUp : faCaretDown} />
+				)}
+			</div>
+		);
+	}
+
+	function setSortingParams(col) {
+		if (col.name === sorting.property) {
+			setSorting((sorting) => ({
+				property: sorting.property,
+				direction: sorting.direction === "asc" ? "desc" : "asc",
+			}));
+		} else {
+			setSorting({
+				property: col.name,
+				direction: "desc",
+			});
+		}
+	}
+
+	function sortByProperty(property = "date", direction = "desc") {
+		if (property === "category") {
+			return (a, b) => {
+				if (a[property].text.toLowerCase() > b[property].text.toLowerCase())
+					return direction === "asc" ? 1 : -1;
+				if (a[property].text.toLowerCase() < b[property].text.toLowerCase())
+					return direction === "asc" ? -1 : 1;
+				return 0;
+			};
+		}
+
+		if (property === "name" || property == "comment	") {
+			return (a, b) => {
+				if (a[property].toLowerCase() > b[property].toLowerCase())
+					return direction === "asc" ? 1 : -1;
+				if (a[property].toLowerCase() < b[property].toLowerCase())
+					return direction === "asc" ? -1 : 1;
+				return 0;
+			};
+		}
+
+		if (property === "ref") {
+			property = isGroupTransactions ? "user" : "group";
+
+			return (a, b) => {
+				if (a[property] == null || b[property] == null) return 0;
+				if (a[property].name.toLowerCase() > b[property].name.toLowerCase())
+					return direction === "asc" ? 1 : -1;
+				if (a[property].name.toLowerCase() < b[property].name.toLowerCase())
+					return direction === "asc" ? -1 : 1;
+				return 0;
+			};
+		}
+
+		return (a, b) => {
+			if (a[property] > b[property]) return direction === "asc" ? 1 : -1;
+			if (a[property] < b[property]) return direction === "asc" ? -1 : 1;
+			return 0;
+		};
+	}
+
 	return (
 		<div className="transactionsTable__container scrollbar">
 			<table className={`transactions__table${className !== "" ? ` ${className}` : ""}`}>
@@ -13,12 +102,11 @@ function TransactionsTable({ cols = [], transactions = [], isGroupTransactions, 
 						{cols.map((col) => {
 							if (col.visible) {
 								return (
-									<th key={col.name} colSpan={col.name === "category" ? 2 : 1}>
-										{col.name === "ref"
-											? isGroupTransactions
-												? "Tag"
-												: "Csoport"
-											: col.text}
+									<th
+										key={col.name}
+										colSpan={col.name === "category" ? 2 : 1}
+										onClick={() => setSortingParams(col)}>
+										{getThContent(col)}
 									</th>
 								);
 							} else return <Fragment key={col.name}></Fragment>;
@@ -27,7 +115,7 @@ function TransactionsTable({ cols = [], transactions = [], isGroupTransactions, 
 				</thead>
 
 				<tbody>
-					{transactions.map((transaction) => (
+					{orderedTransactions.map((transaction) => (
 						<tr key={transaction.id}>
 							{cols[0].visible && (
 								<>
@@ -57,8 +145,7 @@ function TransactionsTable({ cols = [], transactions = [], isGroupTransactions, 
 							)}
 							{cols[5].visible && (
 								<td
-									className={`transactionsTable__amount transactionsTable__amount--${transaction.type}`}
-								>
+									className={`transactionsTable__amount transactionsTable__amount--${transaction.type}`}>
 									{transaction.type === "expense"
 										? "-"
 										: transaction.type === "income"

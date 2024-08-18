@@ -137,6 +137,7 @@ function NewTransaction() {
 
 						<div className="newTransaction__inputs">
 							<CategorySelect
+								id="newTransactionCategory"
 								items={validCategories}
 								label="Kategória"
 								index={categoryIndex}

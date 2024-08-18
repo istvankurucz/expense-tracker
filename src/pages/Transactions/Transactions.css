@@ -1,6 +1,7 @@
-.transactions__table__buttons {
+.transactions__settings {
 	display: flex;
-	gap: 7.5rem;
+	flex-direction: column;
+	gap: 2rem;
 	align-items: stretch;
 }
 
@@ -8,7 +9,7 @@
 	flex: 1;
 }
 
-.transactions__table__buttons__right {
+.transactions__settings__right {
 	display: inline-flex;
 	gap: 1.5rem;
 	justify-content: flex-end;
@@ -20,19 +21,19 @@
 }
 
 @media screen and (max-width: 992px) {
-	.transactions__table__buttons {
+	.transactions__settings {
 		flex-wrap: wrap;
 		gap: 2rem;
 		justify-content: flex-end;
 	}
 
-	.transactions__table__buttons__right {
+	.transactions__settings__right {
 		flex-wrap: wrap;
 	}
 }
 
 @media screen and (max-width: 576px) {
-	.transactions__table__buttons {
-		justify-content: flex-start;
+	.transactions__settings__button__text {
+		display: none;
 	}
 }

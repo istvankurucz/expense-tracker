@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
+import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChartSimple } from "@fortawesome/free-solid-svg-icons";
 import Button from "../../../components/ui/Button/Button";
-import { useState } from "react";
 import Dropdown from "../../../components/ui/Dropdown/Dropdown";
 import Checkbox from "../../../components/form/Checkbox/Checkbox";
 import "./TransactionsColumns.css";
@@ -23,9 +23,13 @@ function TransactionsColumns({ visibleCols = [], setVisibleCols }) {
 
 	return (
 		<Dropdown>
-			<Button variant="secondary" round onClick={() => setShowList((show) => !show)}>
+			<Button
+				variant="secondary"
+				round
+				title="Oszlopok"
+				onClick={() => setShowList((show) => !show)}>
 				<FontAwesomeIcon icon={faChartSimple} />
-				Oszlopok
+				<span className="transactions__settings__button__text">Oszlopok</span>
 			</Button>
 
 			<Dropdown.List show={showList} setShow={setShowList}>

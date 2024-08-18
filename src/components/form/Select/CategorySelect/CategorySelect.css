@@ -33,17 +33,10 @@
 }
 
 .categorySelect__options {
-	max-height: 10rem;
-	list-style: none;
-	border-radius: var(--br);
-	box-shadow: 0.1rem 0.1rem 0.5rem var(--info-color);
-	overflow-y: auto;
-	position: absolute;
-	top: calc(100% + 0.25rem);
-	left: 0;
-	right: 0;
+	padding-block: 0 !important;
 }
 
 .categorySelect__options li {
+	padding: 0 !important;
 	cursor: pointer;
 }

@@ -31,15 +31,6 @@ function useGroupSelect() {
 		return valid;
 	}, [groups, groupId]);
 
-	const getGroupSelectItems = useCallback(
-		(validGroupId) => {
-			if (validGroupId) {
-				return [noGroup, ...groups.map((group) => ({ id: group.id, name: group.name }))];
-			} else return [noGroup];
-		},
-		[groups]
-	);
-
 	const getDefaultGroupIndex = useCallback(() => {
 		if (groupId === "") return 0;
 
@@ -52,15 +43,18 @@ function useGroupSelect() {
 
 	// effect
 	useEffect(() => {
-		// Check if there is a group ID
+		// Check if there is any group of the user
+		if (groups.length === 0) return;
+
+		// Set the items of the select
+		const items = [noGroup, ...groups.map((group) => ({ id: group.id, name: group.name }))];
+		setGroupSelectItems(items);
+
+		// Check if there is a given group ID
 		if (groupId == null) return;
 
 		// Check if the ID is valid
-		const validGroupId = checkValidGroupId();
-		if (!validGroupId) return;
-
-		// Set the items of the select
-		setGroupSelectItems(getGroupSelectItems(validGroupId));
+		if (!checkValidGroupId()) return;
 
 		// Set the default index
 		setIndex(getDefaultGroupIndex());
@@ -75,7 +69,7 @@ function useGroupSelect() {
 				details: "Ha szeretnéd módosíthatod a lap alján.",
 			},
 		});
-	}, [groupId, checkValidGroupId, getGroupSelectItems, getDefaultGroupIndex, dispatch]);
+	}, [groups, groupId, checkValidGroupId, getDefaultGroupIndex, dispatch]);
 
 	return { groupSelectItems, index, setIndex };
 }

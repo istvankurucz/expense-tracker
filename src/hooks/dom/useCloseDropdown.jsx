@@ -12,7 +12,7 @@ function useCloseDropdown(show, setShow) {
 		document.addEventListener("click", handleClick);
 
 		return () => document.removeEventListener("click", handleClick);
-	}, [show]);
+	}, [show, setShow]);
 }
 
 export default useCloseDropdown;
