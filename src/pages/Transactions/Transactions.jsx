@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFilter, faTable } from "@fortawesome/free-solid-svg-icons";
+import { faTable } from "@fortawesome/free-solid-svg-icons";
 import UserLoadingFrame from "../../components/layout/LoadingFrame/UserLoadingFrame/UserLoadingFrame";
 import Page from "../../components/layout/Page/Page";
 import Section from "../../components/layout/Section/Section";
@@ -9,6 +9,7 @@ import useTransactions from "../../hooks/transaction/useTransactions";
 import Button from "../../components/ui/Button/Button";
 import Spinner from "../../components/ui/Spinner/Spinner";
 import TransactionsColumns from "./TransactionsColumns/TransactionsColumns";
+import TransactionsFilter from "./TransactionsFilter/TransactionsFilter";
 import Input from "../../components/form/Input/Input";
 import "./Transactions.css";
 
@@ -60,6 +61,8 @@ function Transactions() {
 				</Section>
 
 				<Section variant="secondary" id="transactionsSettings">
+					<Section.Title>Keresés és beállítások</Section.Title>
+
 					<div className="transactions__settings">
 						<Input
 							type="search"
@@ -70,10 +73,7 @@ function Transactions() {
 						/>
 
 						<div className="transactions__settings__right">
-							<Button variant="info" round title="Szűrés">
-								<FontAwesomeIcon icon={faFilter} />
-								<span className="transactions__settings__button__text">Szűrés</span>
-							</Button>
+							<Transactions.Filter />
 
 							<Button variant="secondary" round title="Nézet">
 								<FontAwesomeIcon icon={faTable} />
@@ -90,9 +90,11 @@ function Transactions() {
 				</Section>
 
 				<Section id="transactionsTable">
+					<Section.Title>Tranzakciók</Section.Title>
+
 					{transactionsLoading ? (
 						<div className="transactions__table__loading">
-							<Spinner variant="text" size="3rem" text="Adatok betöltése" />
+							<Spinner variant="text" size="3rem" text="Tranzakciók betöltése" />
 						</div>
 					) : (
 						<Transactions.Table
@@ -107,6 +109,7 @@ function Transactions() {
 	);
 }
 
+Transactions.Filter = TransactionsFilter;
 Transactions.Columns = TransactionsColumns;
 Transactions.Table = TransactionsTable;
 

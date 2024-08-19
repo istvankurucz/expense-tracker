@@ -1,4 +1,5 @@
 .dropdownList {
+	width: max-content;
 	display: none;
 	list-style: none;
 	background-color: var(--primary-color);
@@ -8,6 +9,7 @@
 	position: absolute;
 	top: calc(100% + 0.25rem);
 	right: 0;
+	z-index: 10;
 }
 .dropdownList--show {
 	display: block;

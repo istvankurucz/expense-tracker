@@ -69,6 +69,7 @@
 
 .input__input {
 	flex: 1;
+	max-width: 100%;
 	background-color: transparent;
 	border: none;
 	transition: border-color 200ms ease, box-shadow 200ms ease;

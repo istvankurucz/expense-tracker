@@ -1,6 +1,6 @@
 import { useLayoutEffect } from "react";
 
-function useCloseDropdown(show, setShow) {
+function useCloseDropdown(show, setShow, dropdownList) {
 	useLayoutEffect(() => {
 		function handleClick(e) {
 			if (!show) return;

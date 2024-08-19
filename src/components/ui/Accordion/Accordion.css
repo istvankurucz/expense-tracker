@@ -1,3 +1,8 @@
+.accordion__header {
+	user-select: none;
+	cursor: pointer;
+}
+
 .accordion__content {
 	display: grid;
 	grid-template-rows: 0fr;

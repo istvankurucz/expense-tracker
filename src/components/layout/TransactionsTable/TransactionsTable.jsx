@@ -1,22 +1,24 @@
 import PropTypes from "prop-types";
-import { Fragment, useState } from "react";
+import { Fragment, useLayoutEffect, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
+import { faCaretDown, faCaretUp, faSort } from "@fortawesome/free-solid-svg-icons";
 import CategoryIcon from "../../ui/CategoryIcon/CategoryIcon";
 import formatPrice from "../../../utils/format/formatPrice";
+import useTransactionsTable from "../../../hooks/transaction/useTransactionsTable";
 import "./TransactionsTable.css";
 
 function TransactionsTable({ cols = [], transactions = [], isGroupTransactions, className = "" }) {
 	// States
-	const [sorting, setSorting] = useState({ property: "amount", direction: "desc" });
+	const { sortedTransactions, sorting, setSortingParams } = useTransactionsTable(transactions);
 
-	// console.log("Transactions:", transactions);
+	// console.log("Sorted:", sortedTransactions);
 
-	// Variables
-	const orderedTransactions = transactions.toSorted(
-		sortByProperty(sorting.property, sorting.direction)
-	);
-	// console.log("Ordered:", orderedTransactions);
+	const containerRef = useRef();
+	useLayoutEffect(() => {
+		containerRef.current.scrollTo({
+			left: 1000,
+		});
+	}, []);
 
 	// Functions
 	function getThText(col) {
@@ -26,76 +28,33 @@ function TransactionsTable({ cols = [], transactions = [], isGroupTransactions, 
 		} else return col.text;
 	}
 
-	function getThContent(col) {
-		const text = getThText(col);
+	function getThIcon(col) {
+		// Array of sortable columns
+		const sortableCols = ["category", "date", "amount"];
 
-		return (
-			<div className="transactions__table__th">
-				{text}
-				{col.name === sorting.property && (
-					<FontAwesomeIcon icon={sorting.direction === "asc" ? faCaretUp : faCaretDown} />
-				)}
-			</div>
-		);
-	}
+		// If the given col is the sorted property
+		if (sorting.property === col.name)
+			return (
+				<FontAwesomeIcon
+					icon={sorting.asc ? faCaretUp : faCaretDown}
+					className="transactions__table__th__icon transactions__table__th__icon--text"
+				/>
+			);
 
-	function setSortingParams(col) {
-		if (col.name === sorting.property) {
-			setSorting((sorting) => ({
-				property: sorting.property,
-				direction: sorting.direction === "asc" ? "desc" : "asc",
-			}));
-		} else {
-			setSorting({
-				property: col.name,
-				direction: "desc",
-			});
-		}
-	}
+		// If the column is sortable
+		if (sortableCols.includes(col.name))
+			return (
+				<FontAwesomeIcon
+					icon={faSort}
+					className="transactions__table__th__icon transactions__table__th__icon--info"
+				/>
+			);
 
-	function sortByProperty(property = "date", direction = "desc") {
-		if (property === "category") {
-			return (a, b) => {
-				if (a[property].text.toLowerCase() > b[property].text.toLowerCase())
-					return direction === "asc" ? 1 : -1;
-				if (a[property].text.toLowerCase() < b[property].text.toLowerCase())
-					return direction === "asc" ? -1 : 1;
-				return 0;
-			};
-		}
-
-		if (property === "name" || property == "comment	") {
-			return (a, b) => {
-				if (a[property].toLowerCase() > b[property].toLowerCase())
-					return direction === "asc" ? 1 : -1;
-				if (a[property].toLowerCase() < b[property].toLowerCase())
-					return direction === "asc" ? -1 : 1;
-				return 0;
-			};
-		}
-
-		if (property === "ref") {
-			property = isGroupTransactions ? "user" : "group";
-
-			return (a, b) => {
-				if (a[property] == null || b[property] == null) return 0;
-				if (a[property].name.toLowerCase() > b[property].name.toLowerCase())
-					return direction === "asc" ? 1 : -1;
-				if (a[property].name.toLowerCase() < b[property].name.toLowerCase())
-					return direction === "asc" ? -1 : 1;
-				return 0;
-			};
-		}
-
-		return (a, b) => {
-			if (a[property] > b[property]) return direction === "asc" ? 1 : -1;
-			if (a[property] < b[property]) return direction === "asc" ? -1 : 1;
-			return 0;
-		};
+		return <></>;
 	}
 
 	return (
-		<div className="transactionsTable__container scrollbar">
+		<div ref={containerRef} className="transactionsTable__container scrollbar">
 			<table className={`transactions__table${className !== "" ? ` ${className}` : ""}`}>
 				<thead>
 					<tr>
@@ -105,8 +64,11 @@ function TransactionsTable({ cols = [], transactions = [], isGroupTransactions, 
 									<th
 										key={col.name}
 										colSpan={col.name === "category" ? 2 : 1}
-										onClick={() => setSortingParams(col)}>
-										{getThContent(col)}
+										onClick={() => setSortingParams(col.name)}>
+										<div className="transactions__table__th">
+											{getThText(col)}
+											{getThIcon(col)}
+										</div>
 									</th>
 								);
 							} else return <Fragment key={col.name}></Fragment>;
@@ -115,7 +77,7 @@ function TransactionsTable({ cols = [], transactions = [], isGroupTransactions, 
 				</thead>
 
 				<tbody>
-					{orderedTransactions.map((transaction) => (
+					{sortedTransactions.map((transaction) => (
 						<tr key={transaction.id}>
 							{cols[0].visible && (
 								<>

@@ -1,0 +1,56 @@
+.transactionsFilter__main {
+	padding: 1rem;
+}
+
+.transactionsFilter__accordion:not(:last-child) {
+	margin-bottom: 1rem;
+}
+
+.transactionsFilter__categories {
+	max-height: 8rem;
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+	overflow-y: auto;
+}
+
+.transactionsFilter__categories li {
+	text-transform: capitalize;
+}
+
+.transactionsFilter__categories__divider {
+	flex-shrink: 0;
+}
+
+.transactionsFilter__dates,
+.transactionsFilter__amounts {
+	display: flex;
+	gap: 1rem;
+	padding-inline: 0.25rem;
+	overflow-x: auto;
+}
+
+.transactionsFilter__input {
+	width: 10rem;
+}
+
+.transactionsFilter__buttons {
+	display: flex;
+	gap: 1rem;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 1rem;
+}
+
+@media screen and (max-width: 768px) {
+	.transactionsFilter__main {
+		left: 0;
+	}
+}
+
+@media screen and (max-width: 576px) {
+	.transactionsFilter__main {
+		left: 50%;
+		translate: -50% 0;
+	}
+}

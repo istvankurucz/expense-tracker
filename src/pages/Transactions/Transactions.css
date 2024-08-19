@@ -10,9 +10,10 @@
 }
 
 .transactions__settings__right {
-	display: inline-flex;
+	display: flex;
 	gap: 1.5rem;
 	justify-content: flex-end;
+	align-items: flex-start;
 }
 
 .transactions__table__loading {

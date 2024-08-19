@@ -28,6 +28,15 @@
 	align-items: center;
 }
 
+.transactions__table__th__icon {
+	--color: var(--text-color);
+
+	color: var(--color);
+}
+.transactions__table__th__icon--info {
+	--color: var(--info-color);
+}
+
 .transactions__table tbody tr:hover {
 	background-color: var(--secondary-color);
 }
