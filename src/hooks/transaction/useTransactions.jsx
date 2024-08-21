@@ -6,6 +6,7 @@ import findTransactionCategory from "../../utils/transaction/findTransactionCate
 import { useParams, useSearchParams } from "react-router-dom";
 import fetchGroup from "../../utils/group/fetchGroup";
 import fetchUser from "../../utils/user/fetchUser";
+import getTransaction from "../../utils/transaction/getTransaction";
 
 function useTransactions(max = null) {
 	// States
@@ -62,27 +63,8 @@ function useTransactions(max = null) {
 		return q;
 	}
 
-	async function getGroup(transactionGroup) {
-		if (transactionGroup == null) return null;
-
-		const group = await fetchGroup(transactionGroup.id);
-		return group;
-	}
-
 	async function getTransactions(docs = []) {
-		const transactions = docs.map(async (transaction) => {
-			return {
-				id: transaction.id,
-				category: findTransactionCategory(transaction.data().category),
-				type: transaction.data().type,
-				date: new Date(transaction.data().date.seconds * 1000),
-				group: await getGroup(transaction.data().group),
-				user: await fetchUser(transaction.data().user.id),
-				name: transaction.data().name,
-				amount: transaction.data().amount,
-				comment: transaction.data().comment,
-			};
-		});
+		const transactions = docs.map(async (transaction) => await getTransaction(transaction));
 
 		return await Promise.all(transactions);
 	}

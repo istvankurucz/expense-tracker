@@ -1,0 +1,122 @@
+.transactionDetails__body__loading {
+	text-align-last: center;
+	padding-block: 3rem;
+}
+
+.transactionDetails__body__noTransaction {
+	text-align: center;
+	padding-block: 2rem;
+}
+
+.transactionDetails__body__noTransaction svg {
+	width: 5rem;
+	height: 5rem;
+	color: var(--secondary-color);
+	margin-bottom: 1rem;
+}
+
+.transactionDetails__body__main {
+	display: flex;
+	gap: 3rem;
+	padding-top: 0.5rem;
+}
+
+.transactionDetails__body__category {
+	display: flex;
+	gap: 1.5rem;
+	align-items: center;
+	margin-bottom: 1.5rem;
+	position: relative;
+	isolation: isolate;
+}
+.transactionDetails__body__category::before {
+	content: "";
+	background: linear-gradient(to right, var(--bg-color) 75%, transparent);
+	background-color: var(--bg-color);
+	border-radius: 0 var(--br-pill) var(--br-pill) 0;
+	position: absolute;
+	left: -2rem;
+	top: -0.5rem;
+	bottom: -0.5rem;
+	right: -1.5rem;
+	z-index: -1;
+}
+
+.transactionDetails__body__category__icon {
+	width: 2rem;
+	height: 2rem;
+}
+
+.transactionDetails__body__category__text {
+	text-transform: capitalize;
+	color: var(--color);
+}
+
+.transactionDetails__body__name {
+	font-size: var(--fs-xl);
+	font-weight: 500;
+	margin-bottom: 1rem;
+}
+.transactionDetails__body__name::first-letter {
+	text-transform: uppercase;
+}
+
+.transactionDetails__body__date {
+	font-size: 0.95rem;
+}
+
+.transactionDetails__body__main__right {
+	flex: 1;
+}
+
+.transactionDetails__body__amount {
+	width: fit-content;
+	margin-right: 2rem;
+	margin-left: auto;
+}
+
+.transactionDetails__body__amount__text {
+	display: block;
+	font-size: var(--fs-l);
+	text-align: center;
+	font-weight: 500;
+	margin-bottom: 0.5rem;
+}
+
+.transactionDetails__body__amount__value {
+	font-size: var(--fs-xl);
+	font-weight: 500;
+	color: var(--color);
+}
+/* #region Variants */
+.transactionDetails__body__amount__value--expense {
+	--color: var(--danger-color);
+}
+.transactionDetails__body__amount__value--income {
+	--color: var(--success-color);
+}
+/* #endregion */
+
+.transactionDetails__body__group {
+	margin-bottom: 1.5rem;
+}
+
+.transactionDetails__body__group__text {
+	display: inline-block;
+	margin-right: 0.3rem;
+}
+
+.transactionDetails__body__group__noGroup,
+.transactionDetails__body__comment__noComment {
+	font-size: var(--fs-s);
+	font-style: italic;
+}
+
+.transactionDetails__body__group__value {
+	font-style: italic;
+}
+
+.transactionDetails__body__comment {
+	display: flex;
+	gap: 0.3rem;
+}

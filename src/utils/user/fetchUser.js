@@ -2,7 +2,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../config/firebase/firebase";
 
 export default async function fetchUser(userId = "") {
-	if (userId === "") return;
+	if (userId === "") return null;
 
 	try {
 		const userRef = doc(db, "users", userId);

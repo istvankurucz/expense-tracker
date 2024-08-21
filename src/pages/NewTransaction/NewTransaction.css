@@ -1,6 +1,7 @@
 #newTransactionWelcome > * {
 	display: flex;
 	gap: 2rem;
+	flex-wrap: wrap;
 	justify-content: center;
 }
 
@@ -12,8 +13,19 @@
 	text-transform: capitalize;
 }
 
+.newTransaction__loading {
+	text-align: center;
+	padding-block: 3rem;
+}
+
 .newTransaction__inputs {
 	display: flex;
 	flex-direction: column;
 	gap: 1.5rem;
+}
+
+@media screen and (max-width: 576px) {
+	.newTransaction__type__select {
+		margin-inline: auto;
+	}
 }

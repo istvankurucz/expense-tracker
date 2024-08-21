@@ -2,28 +2,12 @@ import { useStateValue } from "../../contexts/Context API/StateProvider";
 import useTransactions from "../../hooks/transaction/useTransactions";
 import Page from "../../components/layout/Page/Page";
 import Section from "../../components/layout/Section/Section";
-import Chart from "../../components/ui/Chart/Chart";
 import NoTransaction from "../../components/layout/Section/NoTransaction/NoTransaction";
 import UserLoadingFrame from "../../components/layout/LoadingFrame/UserLoadingFrame/UserLoadingFrame";
-import "./Home.css";
 import HomeBalanceSection from "./HomeBalanceSection/HomeBalanceSection";
 import HomeCategoriesSection from "./HomeCategoriesSection/HomeCategoriesSection";
 import LastTransactionsSection from "../../components/layout/Section/LastTransactionsSection/LastTransactionsSection";
-
-const pieLegend = [
-	{
-		color: "red",
-		text: "red",
-	},
-	{
-		color: "blue",
-		text: "blue",
-	},
-	{
-		color: "green",
-		text: "green",
-	},
-];
+import "./Home.css";
 
 function Home() {
 	// States

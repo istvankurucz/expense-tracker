@@ -6,6 +6,7 @@ import { faComment } from "@fortawesome/free-solid-svg-icons";
 import CategoryIcon from "../CategoryIcon/CategoryIcon";
 import formatPrice from "../../../utils/format/formatPrice";
 import Tooltip from "../Tooltip/Tooltip";
+import getTransactionAmountSign from "../../../utils/transaction/getTransactionAmountSign";
 import "./Transaction.css";
 
 function Transaction({ category, type, date, group, user, name, amount, comment = "" }) {
@@ -14,7 +15,7 @@ function Transaction({ category, type, date, group, user, name, amount, comment 
 	const { groupId } = useParams();
 
 	// Variables
-	const sign = type === "expense" ? "-" : type === "income" ? "+" : "";
+	const sign = getTransactionAmountSign(type);
 	const hasGroupId = groupId != undefined;
 	const showUser = hasGroupId;
 	const showGroup = group != null || !hasGroupId;

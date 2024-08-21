@@ -26,7 +26,8 @@ function CategorySelect({ items, index, setIndex, id, className = "" }) {
 					"--bg-color": items[index].colors.bg,
 				}}
 				className="categorySelect__selected"
-				onFocus={() => setShowOptions(true)}>
+				onFocus={() => setShowOptions(true)}
+			>
 				<CategorySelect.Option category={items[index]} />
 				<FontAwesomeIcon icon={faAngleDown} />
 			</button>

@@ -1,15 +1,20 @@
 import PropTypes from "prop-types";
 import { Fragment, useLayoutEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown, faCaretUp, faSort } from "@fortawesome/free-solid-svg-icons";
 import CategoryIcon from "../../ui/CategoryIcon/CategoryIcon";
 import formatPrice from "../../../utils/format/formatPrice";
 import useTransactionsTable from "../../../hooks/transaction/useTransactionsTable";
+import getTransactionAmountSign from "../../../utils/transaction/getTransactionAmountSign";
 import "./TransactionsTable.css";
+
+const sortableColumns = ["category", "date", "amount"];
 
 function TransactionsTable({ cols = [], transactions = [], isGroupTransactions, className = "" }) {
 	// States
 	const { sortedTransactions, sorting, setSortingParams } = useTransactionsTable(transactions);
+	const navigate = useNavigate();
 
 	// console.log("Sorted:", sortedTransactions);
 
@@ -63,8 +68,12 @@ function TransactionsTable({ cols = [], transactions = [], isGroupTransactions, 
 								return (
 									<th
 										key={col.name}
-										colSpan={col.name === "category" ? 2 : 1}
-										onClick={() => setSortingParams(col.name)}>
+										onClick={
+											sortableColumns.includes(col.name)
+												? () => setSortingParams(col.name)
+												: () => {}
+										}
+									>
 										<div className="transactions__table__th">
 											{getThText(col)}
 											{getThIcon(col)}
@@ -78,16 +87,19 @@ function TransactionsTable({ cols = [], transactions = [], isGroupTransactions, 
 
 				<tbody>
 					{sortedTransactions.map((transaction) => (
-						<tr key={transaction.id}>
+						<tr
+							key={transaction.id}
+							title="Kattitns a részletekért"
+							onClick={() => navigate(`/transactions/${transaction.id}`)}
+						>
 							{cols[0].visible && (
-								<>
-									<td className="transactionsTable__categoryIcon">
-										<CategoryIcon category={transaction.category} />
-									</td>
-									<td className="transactionsTable__categoryText">
-										{transaction.category.text}
-									</td>
-								</>
+								<td
+									style={{ "--color": transaction.category.colors.text }}
+									className="transactionsTable__category"
+								>
+									<CategoryIcon category={transaction.category} />
+									{transaction.category.text}
+								</td>
 							)}
 							{cols[1].visible && (
 								<td className="transactionsTable__date">
@@ -107,12 +119,9 @@ function TransactionsTable({ cols = [], transactions = [], isGroupTransactions, 
 							)}
 							{cols[5].visible && (
 								<td
-									className={`transactionsTable__amount transactionsTable__amount--${transaction.type}`}>
-									{transaction.type === "expense"
-										? "-"
-										: transaction.type === "income"
-										? "+"
-										: ""}
+									className={`transactionsTable__amount transactionsTable__amount--${transaction.type}`}
+								>
+									{getTransactionAmountSign(transaction.type)}
 									{formatPrice(transaction.amount)}
 								</td>
 							)}

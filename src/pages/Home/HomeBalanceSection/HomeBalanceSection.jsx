@@ -20,8 +20,6 @@ function HomeBalanceSection({ transactions = [], loading }) {
 	// States
 	const { index, setIndex, chartData } = useIncomeExpenseChart(transactions);
 
-	// console.log("Transactions:", transactions);
-
 	return (
 		<Section id="homeBalance">
 			<Section.Title>Aktuális egyenleg</Section.Title>

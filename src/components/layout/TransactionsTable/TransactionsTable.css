@@ -37,6 +37,9 @@
 	--color: var(--info-color);
 }
 
+.transactions__table tbody tr {
+	cursor: pointer;
+}
 .transactions__table tbody tr:hover {
 	background-color: var(--secondary-color);
 }
@@ -48,12 +51,13 @@
 	padding: 0.5rem 1rem;
 }
 
-.transactionsTable__categoryIcon {
-	max-width: 3rem;
-	padding-left: 0.25rem !important;
-}
-
-.transactionsTable__categoryText {
+.transactionsTable__category {
+	display: flex;
+	gap: 2rem;
+	align-items: center;
+	font-weight: 500;
+	text-transform: capitalize;
+	color: var(--color);
 	padding-left: 0rem !important;
 }
 .transactionsTable__categoryText::first-letter {

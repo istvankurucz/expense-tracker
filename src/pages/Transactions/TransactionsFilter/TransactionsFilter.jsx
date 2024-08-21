@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilter, faX } from "@fortawesome/free-solid-svg-icons";
 import { useSearchParams } from "react-router-dom";
@@ -9,11 +9,13 @@ import categories from "../../../assets/categories";
 import Checkbox from "../../../components/form/Checkbox/Checkbox";
 import Input from "../../../components/form/Input/Input";
 import Divider from "../../../components/ui/Divider/Divider";
+import formatDate from "../../../utils/format/formatDate";
 import "./TransactionsFilter.css";
 
 function TransactionsFilter() {
 	// States
 	const [show, setShow] = useState(false);
+	const [filterCount, setFilterCount] = useState(0);
 	const [searchParams, setSearchParams] = useSearchParams();
 
 	// Refs
@@ -24,12 +26,29 @@ function TransactionsFilter() {
 	const amountFromRef = useRef();
 	const amountToRef = useRef();
 
-	// Functions
-	function setAllCategories() {
-		const checkboxes = Array.from(
-			categoriesListRef.current.querySelectorAll(".checkbox__input")
-		).slice(1);
+	// Set the filter count when the page finished loading
+	useLayoutEffect(() => {
+		updateFilterCount();
+	}, []);
 
+	// Functions
+	function getAllCategoryCheckbox() {
+		const checkboxes = categoriesListRef.current.querySelectorAll(".checkbox__input");
+		return Array.from(checkboxes).slice(1);
+	}
+
+	function checkIfAllCategoriesAreChecked() {
+		const checkboxes = getAllCategoryCheckbox();
+
+		let isAllSelected = true;
+		checkboxes.forEach((checkbox) => {
+			if (!checkbox.checked) isAllSelected = false;
+		});
+		return isAllSelected;
+	}
+
+	function setAllCategories() {
+		const checkboxes = getAllCategoryCheckbox();
 		checkboxes.forEach((checkbox) => (checkbox.checked = allCategoriesRef.current.checked));
 	}
 
@@ -53,15 +72,7 @@ function TransactionsFilter() {
 	}
 
 	function setAllCategoriesCheckbox() {
-		const checkboxes = Array.from(
-			categoriesListRef.current.querySelectorAll(".checkbox__input")
-		).slice(1);
-
-		let isAllChecked = true;
-		checkboxes.forEach((checkbox) => {
-			if (!checkbox.checked) isAllChecked = false;
-		});
-
+		const isAllChecked = checkIfAllCategoriesAreChecked();
 		allCategoriesRef.current.checked = isAllChecked;
 	}
 
@@ -70,7 +81,7 @@ function TransactionsFilter() {
 		if (dateString == null) return "";
 
 		const date = new Date(dateString);
-		return date.toLocaleDateString().replaceAll(".", "").replaceAll(" ", "-");
+		return formatDate(date);
 	}
 
 	function getDefaultAmount(param) {
@@ -81,12 +92,28 @@ function TransactionsFilter() {
 	}
 
 	function getCategories() {
-		const checkboxes = Array.from(categoriesListRef.current.querySelectorAll(".checkbox__input"));
+		const checkboxes = getAllCategoryCheckbox();
 
-		return checkboxes.slice(1).map((checkbox) => ({
+		return checkboxes.map((checkbox) => ({
 			name: checkbox.getAttribute("id").split("-")[1],
 			checked: checkbox.checked,
 		}));
+	}
+
+	function updateFilterCount() {
+		let newCount = 0;
+
+		// Check if every category checkbox is checked
+		if (!checkIfAllCategoriesAreChecked()) newCount++;
+
+		// Check if at least 1 date is set
+		if (dateFromRef.current.value !== "" || dateToRef.current.value !== "") newCount++;
+
+		// Check if at least 1 amount is set
+		if (amountFromRef.current.value !== "" || amountToRef.current.value !== "") newCount++;
+
+		// Set the state
+		setFilterCount(newCount);
 	}
 
 	function updateFilterParams() {
@@ -106,12 +133,16 @@ function TransactionsFilter() {
 			amountTo,
 		});
 
-		// 3. Close the dropdown
+		// 3. Update the filter count
+		updateFilterCount();
+
+		// 4. Close the dropdown
 		setShow(false);
 	}
 
 	function resetFilterParams() {
 		setSearchParams({});
+		setFilterCount(0);
 		setShow(false);
 	}
 
@@ -120,12 +151,14 @@ function TransactionsFilter() {
 			<Button variant="info" round title="Szűrés" onClick={() => setShow((show) => !show)}>
 				<FontAwesomeIcon icon={faFilter} />
 				<span className="transactions__settings__button__text">Szűrés</span>
+				{filterCount > 0 && <span className="transacationsFilter__count">{filterCount}</span>}
 			</Button>
 
 			<Dropdown.List show={show} setShow={setShow} className="transactionsFilter__main">
 				<TransactionsFilter.Accordion
 					header={<TransactionsFilter.Accordion.Header text="Kategória" />}
-					className="transactionsFilter__accordion">
+					className="transactionsFilter__accordion"
+				>
 					<ul ref={categoriesListRef} className="transactionsFilter__categories scrollbar">
 						<li>
 							<Checkbox
@@ -156,7 +189,8 @@ function TransactionsFilter() {
 
 				<TransactionsFilter.Accordion
 					header={<TransactionsFilter.Accordion.Header text="Dátum" />}
-					className="transactionsFilter__accordion">
+					className="transactionsFilter__accordion"
+				>
 					<div className="transactionsFilter__dates scrollbar">
 						<Input
 							type="date"
@@ -180,7 +214,8 @@ function TransactionsFilter() {
 				</TransactionsFilter.Accordion>
 
 				<TransactionsFilter.Accordion
-					header={<TransactionsFilter.Accordion.Header text="Összeg" />}>
+					header={<TransactionsFilter.Accordion.Header text="Összeg" />}
+				>
 					<div className="transactionsFilter__amounts scrollbar">
 						<Input
 							type="number"
@@ -209,7 +244,7 @@ function TransactionsFilter() {
 				<div className="transactionsFilter__buttons">
 					<Button variant="danger" outlined onClick={resetFilterParams}>
 						<FontAwesomeIcon icon={faX} />
-						Szűrők törlése
+						Törlés
 					</Button>
 					<Button onClick={updateFilterParams}>Szűrés</Button>
 				</div>

@@ -4,7 +4,7 @@
 
 	color: var(--color);
 	background-color: var(--bg-color);
-	padding-block: 2rem;
+	padding-block: 5rem;
 }
 
 .footer__container {

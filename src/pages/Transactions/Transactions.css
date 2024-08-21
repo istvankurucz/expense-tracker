@@ -21,6 +21,10 @@
 	padding-block: 3rem;
 }
 
+.transactions__accordion:not(:last-child) {
+	margin-bottom: 2rem;
+}
+
 @media screen and (max-width: 992px) {
 	.transactions__settings {
 		flex-wrap: wrap;

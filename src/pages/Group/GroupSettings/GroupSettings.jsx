@@ -131,7 +131,7 @@ function GroupSettings() {
 								className="groupSettings__data__row__action"
 								onClick={() => setShowChangeNameModal(true)}
 							>
-								Megváltoztatás
+								Módosítás
 							</button>
 						)}
 					</div>
@@ -165,7 +165,7 @@ function GroupSettings() {
 								className="groupSettings__data__row__action"
 								onClick={() => setShowChangeAdminModal(true)}
 							>
-								Megváltoztatás
+								Módosítás
 							</button>
 						)}
 					</div>

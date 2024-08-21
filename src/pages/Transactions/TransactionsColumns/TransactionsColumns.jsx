@@ -27,7 +27,8 @@ function TransactionsColumns({ visibleCols = [], setVisibleCols }) {
 				variant="secondary"
 				round
 				title="Oszlopok"
-				onClick={() => setShowList((show) => !show)}>
+				onClick={() => setShowList((show) => !show)}
+			>
 				<FontAwesomeIcon icon={faChartSimple} />
 				<span className="transactions__settings__button__text">Oszlopok</span>
 			</Button>

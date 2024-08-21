@@ -75,6 +75,19 @@ function useTransactionsTable(transactions = []) {
 		[searchParams]
 	);
 
+	const filterByName = useCallback(
+		(transactions = []) => {
+			const name = searchParams.get("name");
+
+			if (name === null || name === "") return transactions;
+
+			return transactions.filter((transaction) =>
+				transaction.name.toLowerCase().includes(name.toLocaleLowerCase())
+			);
+		},
+		[searchParams]
+	);
+
 	function setSortingParams(property) {
 		if (property === sorting.property) {
 			setSorting((sorting) => ({
@@ -110,7 +123,7 @@ function useTransactionsTable(transactions = []) {
 
 	useEffect(() => {
 		// Filter the transactions
-		setSorted(filterByAmount(filterByDate(filterByCategories(transactions))));
+		setSorted(filterByName(filterByAmount(filterByDate(filterByCategories(transactions)))));
 
 		// Sort the transactions
 		switch (sorting.property) {

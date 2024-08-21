@@ -8,7 +8,7 @@ const noGroup = {
 	name: "-",
 };
 
-function useGroupSelect() {
+function useGroupSelect(transaction) {
 	// States
 	const [, dispatch] = useStateValue();
 	const { groups } = useGroups();
@@ -31,15 +31,18 @@ function useGroupSelect() {
 		return valid;
 	}, [groups, groupId]);
 
-	const getDefaultGroupIndex = useCallback(() => {
-		if (groupId === "") return 0;
+	const getDefaultGroupIndex = useCallback(
+		(groupId = "") => {
+			if (groupId === "") return 0;
 
-		let index = 0;
-		groups.forEach((group, i) => {
-			if (group.id === groupId) index = i;
-		});
-		return index + 1;
-	}, [groups, groupId]);
+			let index = 0;
+			groups.forEach((group, i) => {
+				if (group.id === groupId) index = i;
+			});
+			return index + 1;
+		},
+		[groups, groupId]
+	);
 
 	// effect
 	useEffect(() => {
@@ -50,6 +53,25 @@ function useGroupSelect() {
 		const items = [noGroup, ...groups.map((group) => ({ id: group.id, name: group.name }))];
 		setGroupSelectItems(items);
 
+		// Check if there is a transaction
+		if (transaction !== null && transaction.group !== null) {
+			// Set the default index
+			setIndex(getDefaultGroupIndex(transaction.group.id));
+
+			// Show feedback that the group has been selected automatically
+			dispatch({
+				type: "SET_FEEDBACK",
+				feedback: {
+					show: true,
+					type: "info",
+					message: "A csoport automatikusan beállításra került.",
+					details: "Ha szeretnéd módosíthatod a lap alján.",
+				},
+			});
+
+			return;
+		} else setIndex(0);
+
 		// Check if there is a given group ID
 		if (groupId == null) return;
 
@@ -57,7 +79,7 @@ function useGroupSelect() {
 		if (!checkValidGroupId()) return;
 
 		// Set the default index
-		setIndex(getDefaultGroupIndex());
+		setIndex(getDefaultGroupIndex(groupId));
 
 		// Show feedback that the group has been selected automatically
 		dispatch({
@@ -69,7 +91,7 @@ function useGroupSelect() {
 				details: "Ha szeretnéd módosíthatod a lap alján.",
 			},
 		});
-	}, [groups, groupId, checkValidGroupId, getDefaultGroupIndex, dispatch]);
+	}, [groups, groupId, transaction, checkValidGroupId, getDefaultGroupIndex, dispatch]);
 
 	return { groupSelectItems, index, setIndex };
 }
