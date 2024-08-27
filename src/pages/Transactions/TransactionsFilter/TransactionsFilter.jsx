@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef, useState } from "react";
+import { useCallback, useLayoutEffect, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilter, faX } from "@fortawesome/free-solid-svg-icons";
 import { useSearchParams } from "react-router-dom";
@@ -26,18 +26,7 @@ function TransactionsFilter() {
 	const amountFromRef = useRef();
 	const amountToRef = useRef();
 
-	// Set the filter count when the page finished loading
-	useLayoutEffect(() => {
-		updateFilterCount();
-	}, []);
-
-	// Functions
-	function getAllCategoryCheckbox() {
-		const checkboxes = categoriesListRef.current.querySelectorAll(".checkbox__input");
-		return Array.from(checkboxes).slice(1);
-	}
-
-	function checkIfAllCategoriesAreChecked() {
+	const checkIfAllCategoriesAreChecked = useCallback(() => {
 		const checkboxes = getAllCategoryCheckbox();
 
 		let isAllSelected = true;
@@ -45,6 +34,33 @@ function TransactionsFilter() {
 			if (!checkbox.checked) isAllSelected = false;
 		});
 		return isAllSelected;
+	}, []);
+
+	const updateFilterCount = useCallback(() => {
+		let newCount = 0;
+
+		// Check if every category checkbox is checked
+		if (!checkIfAllCategoriesAreChecked()) newCount++;
+
+		// Check if at least 1 date is set
+		if (dateFromRef.current.value !== "" || dateToRef.current.value !== "") newCount++;
+
+		// Check if at least 1 amount is set
+		if (amountFromRef.current.value !== "" || amountToRef.current.value !== "") newCount++;
+
+		// Set the state
+		setFilterCount(newCount);
+	}, [checkIfAllCategoriesAreChecked]);
+
+	// Set the filter count when the page finished loading
+	useLayoutEffect(() => {
+		updateFilterCount();
+	}, [updateFilterCount]);
+
+	// Functions
+	function getAllCategoryCheckbox() {
+		const checkboxes = categoriesListRef.current.querySelectorAll(".checkbox__input");
+		return Array.from(checkboxes).slice(1);
 	}
 
 	function setAllCategories() {
@@ -100,22 +116,6 @@ function TransactionsFilter() {
 		}));
 	}
 
-	function updateFilterCount() {
-		let newCount = 0;
-
-		// Check if every category checkbox is checked
-		if (!checkIfAllCategoriesAreChecked()) newCount++;
-
-		// Check if at least 1 date is set
-		if (dateFromRef.current.value !== "" || dateToRef.current.value !== "") newCount++;
-
-		// Check if at least 1 amount is set
-		if (amountFromRef.current.value !== "" || amountToRef.current.value !== "") newCount++;
-
-		// Set the state
-		setFilterCount(newCount);
-	}
-
 	function updateFilterParams() {
 		// 1. Get the values
 		const categories = getCategories();
@@ -156,9 +156,12 @@ function TransactionsFilter() {
 
 			<Dropdown.List show={show} setShow={setShow} className="transactionsFilter__main">
 				<TransactionsFilter.Accordion
-					header={<TransactionsFilter.Accordion.Header text="Kategória" />}
-					className="transactionsFilter__accordion"
-				>
+					header={
+						<TransactionsFilter.Accordion.Header>
+							Kategória
+						</TransactionsFilter.Accordion.Header>
+					}
+					className="transactionsFilter__accordion">
 					<ul ref={categoriesListRef} className="transactionsFilter__categories scrollbar">
 						<li>
 							<Checkbox
@@ -188,9 +191,10 @@ function TransactionsFilter() {
 				</TransactionsFilter.Accordion>
 
 				<TransactionsFilter.Accordion
-					header={<TransactionsFilter.Accordion.Header text="Dátum" />}
-					className="transactionsFilter__accordion"
-				>
+					header={
+						<TransactionsFilter.Accordion.Header>Dátum</TransactionsFilter.Accordion.Header>
+					}
+					className="transactionsFilter__accordion">
 					<div className="transactionsFilter__dates scrollbar">
 						<Input
 							type="date"
@@ -214,8 +218,9 @@ function TransactionsFilter() {
 				</TransactionsFilter.Accordion>
 
 				<TransactionsFilter.Accordion
-					header={<TransactionsFilter.Accordion.Header text="Összeg" />}
-				>
+					header={
+						<TransactionsFilter.Accordion.Header>Összeg</TransactionsFilter.Accordion.Header>
+					}>
 					<div className="transactionsFilter__amounts scrollbar">
 						<Input
 							type="number"

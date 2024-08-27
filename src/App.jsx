@@ -14,9 +14,9 @@ import Group from "./pages/Group/Group";
 import Groups from "./pages/Groups/Groups";
 import JoinGroup from "./pages/JoinGroup/JoinGroup";
 import GroupProvider from "./contexts/group/GroupContext";
-import "./App.css";
 import Transactions from "./pages/Transactions/Transactions";
 import TransactionDetails from "./pages/Transactions/TransactionDetails/TransactionDetails";
+import "./App.css";
 
 function App() {
 	// Hooks
@@ -58,8 +58,7 @@ function App() {
 				<Route path="/join-group" element={renderWithHeaderAndFooter(<JoinGroup />)} />
 				<Route
 					path="/groups/:groupId"
-					element={<GroupProvider>{renderWithHeaderAndFooter(<Group />)}</GroupProvider>}
-				>
+					element={<GroupProvider>{renderWithHeaderAndFooter(<Group />)}</GroupProvider>}>
 					<Route index element={<Navigate to="overview" replace />} />
 					<Route path="overview" element={<Group.Overview />} />
 					<Route path="settings" element={<Group.Settings />} />

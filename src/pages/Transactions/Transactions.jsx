@@ -1,7 +1,6 @@
 import { useMemo, useRef, useState } from "react";
 import { Outlet, useSearchParams } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTable } from "@fortawesome/free-solid-svg-icons";
+import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import UserLoadingFrame from "../../components/layout/LoadingFrame/UserLoadingFrame/UserLoadingFrame";
 import Page from "../../components/layout/Page/Page";
 import Section from "../../components/layout/Section/Section";
@@ -12,9 +11,9 @@ import TransactionsColumns from "./TransactionsColumns/TransactionsColumns";
 import TransactionsFilter from "./TransactionsFilter/TransactionsFilter";
 import Input from "../../components/form/Input/Input";
 import TransactionsView from "./TransactionsView/TransactionsView";
-import "./Transactions.css";
 import Accordion from "../../components/ui/Accordion/Accordion";
-import TransactionsAccordionHeader from "../../components/ui/Accordion/TransactionsAccordionHeader/TransactionsAccordionHeader";
+import "./Transactions.css";
+import formatMonth from "../../utils/format/formatMonth";
 
 const cols = [
 	{
@@ -137,14 +136,14 @@ function Transactions() {
 					) : (
 						monthlyTransactions.map((transactionGroup, i) => (
 							<Accordion
+								key={i}
 								header={
-									<TransactionsAccordionHeader
-										text={transactionGroup[0].date.toLocaleDateString().substring(0, 9)}
-									/>
+									<Accordion.Header icon={faCaretDown}>
+										{formatMonth(transactionGroup[0].date)}
+									</Accordion.Header>
 								}
 								defaultExpanded={i === 0}
-								className="transactions__accordion"
-							>
+								className="transactions__accordion">
 								<Transactions.Table
 									cols={visibleCols}
 									transactions={transactionGroup}

@@ -1,10 +1,13 @@
 import { useCallback, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import useSorting from "../sorting/useSorting";
+import sortByProperty from "../../utils/sorting/sortByProperty";
+import sortByCategory from "../../utils/sorting/sortByCategory";
 
 function useTransactionsTable(transactions = []) {
 	// States
 	const [searchParams] = useSearchParams();
-	const [sorting, setSorting] = useState({ property: "date", asc: false });
+	const { sorting, setSortingParams } = useSorting();
 	const [sorted, setSorted] = useState(transactions);
 
 	// Functions
@@ -88,39 +91,6 @@ function useTransactionsTable(transactions = []) {
 		[searchParams]
 	);
 
-	function setSortingParams(property) {
-		if (property === sorting.property) {
-			setSorting((sorting) => ({
-				property: sorting.property,
-				asc: !sorting.asc,
-			}));
-		} else {
-			setSorting({
-				property: property,
-				asc: false,
-			});
-		}
-	}
-
-	function sortByProperty(property, asc) {
-		return (a, b) => {
-			if (a[property] < b[property]) return asc ? -1 : 1;
-			if (a[property] > b[property]) return asc ? 1 : -1;
-			return 0;
-		};
-	}
-
-	function sortByCategory(asc) {
-		return (a, b) => {
-			const aText = a.category.text.toLowerCase();
-			const bText = b.category.text.toLowerCase();
-
-			if (aText < bText) return asc ? -1 : 1;
-			if (aText > bText) return asc ? 1 : -1;
-			return 0;
-		};
-	}
-
 	useEffect(() => {
 		// Filter the transactions
 		setSorted(filterByName(filterByAmount(filterByDate(filterByCategories(transactions)))));
@@ -138,7 +108,15 @@ function useTransactionsTable(transactions = []) {
 				);
 				break;
 		}
-	}, [searchParams, transactions, sorting, filterByAmount, filterByDate, filterByCategories]);
+	}, [
+		searchParams,
+		transactions,
+		sorting,
+		filterByName,
+		filterByAmount,
+		filterByDate,
+		filterByCategories,
+	]);
 
 	return { sortedTransactions: sorted, sorting, setSortingParams };
 }

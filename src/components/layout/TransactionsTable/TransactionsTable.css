@@ -1,24 +1,5 @@
-.transactionsTable__container {
-	overflow-x: auto;
-	padding-inline: 0.25rem;
-}
-
 .transactions__table {
-	--border: 0.1rem solid var(--info-color);
-
 	min-width: 100%;
-	border-collapse: collapse;
-}
-
-.transactions__table thead {
-	border-bottom: var(--border);
-}
-
-.transactions__table thead th {
-	font-weight: 500;
-	padding-block: 0.25rem;
-	user-select: none;
-	cursor: pointer;
 }
 
 .transactions__table__th {
@@ -26,25 +7,6 @@
 	gap: 0.5rem;
 	justify-content: center;
 	align-items: center;
-}
-
-.transactions__table__th__icon {
-	--color: var(--text-color);
-
-	color: var(--color);
-}
-.transactions__table__th__icon--info {
-	--color: var(--info-color);
-}
-
-.transactions__table tbody tr {
-	cursor: pointer;
-}
-.transactions__table tbody tr:hover {
-	background-color: var(--secondary-color);
-}
-.transactions__table tbody tr:not(:last-child) {
-	border-bottom: var(--border);
 }
 
 .transactions__table tbody tr td {

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import categories from "../../assets/categories";
 import groupTransactions from "../../utils/transaction/groupTransactions";
 import getCategoryPieChartData from "../../utils/chart/getCategoryPieChartData";
@@ -21,19 +21,23 @@ const defaultChartData = filteredCategories.map((category, i) => ({
 function useCategoriesChart(transactions = []) {
 	// States
 	const [index, setIndex] = useState(0);
+	const [categorizedTransactions, setCategorizedTransactions] = useState(transactions);
 	const [chartData, setChartData] = useState(defaultChartData);
 	const [chartLegend, setChartLegend] = useState(defaultChartLegend);
 
 	// Functions
-	function filterTransactions(transactions = []) {
-		let filterType = "expense";
-		if (index === 1) filterType = "income";
+	const filterTransactions = useCallback(
+		(transactions = []) => {
+			let filterType = "expense";
+			if (index === 1) filterType = "income";
 
-		const filteredTransactions = transactions.filter(
-			(transaction) => transaction.type === filterType
-		);
-		return filteredTransactions;
-	}
+			const filteredTransactions = transactions.filter(
+				(transaction) => transaction.type === filterType
+			);
+			return filteredTransactions;
+		},
+		[index]
+	);
 
 	useEffect(() => {
 		// Filter the transactions based on type
@@ -41,6 +45,7 @@ function useCategoriesChart(transactions = []) {
 
 		// Group transactions based on the categories
 		const groupedTransactions = groupTransactions(filteredTransactions);
+		setCategorizedTransactions(groupedTransactions);
 
 		// Update chart data
 		const data = getCategoryPieChartData(groupedTransactions);
@@ -49,9 +54,9 @@ function useCategoriesChart(transactions = []) {
 		// Update the chart legend
 		const legend = getCategoryPieChartLegend(groupedTransactions);
 		setChartLegend(legend);
-	}, [transactions, index]);
+	}, [transactions, index, filterTransactions]);
 
-	return { index, setIndex, chartData, chartLegend };
+	return { index, setIndex, categorizedTransactions, chartData, chartLegend };
 }
 
 export default useCategoriesChart;

@@ -22,7 +22,7 @@
 }
 
 .transactions__accordion:not(:last-child) {
-	margin-bottom: 2rem;
+	margin-bottom: 1.5rem;
 }
 
 @media screen and (max-width: 992px) {

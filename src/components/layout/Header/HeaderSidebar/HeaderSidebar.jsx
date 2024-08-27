@@ -95,6 +95,9 @@ function HeaderSidebar({ show, setShow, groups = [] }) {
 									<Link to="/">Adataim</Link>
 								</li>
 								<li>
+									<Link to="/">Jelentések</Link>
+								</li>
+								<li>
 									<Header.AuthButton />
 								</li>
 							</ul>

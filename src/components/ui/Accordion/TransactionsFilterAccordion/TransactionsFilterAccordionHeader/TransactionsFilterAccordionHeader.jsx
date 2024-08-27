@@ -1,19 +1,22 @@
 import PropTypes from "prop-types";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
+import Accordion from "../../Accordion";
 import "./TransactionsFilterAccordionHeader.css";
 
-function TransactionsFilterAccordionHeader({ text }) {
+function TransactionsFilterAccordionHeader({ children }) {
 	return (
-		<div className="transactionsFilterAccordionHeader">
-			<span className="transactionsFilterAccordionHeader__text">{text}</span>
-			<FontAwesomeIcon icon={faAngleDown} />
-		</div>
+		<Accordion.Header
+			className="transactionsFilterAccordionHeader"
+			icon={faAngleDown}
+			rotateIcon={false}
+			justify="space-between">
+			{children}
+		</Accordion.Header>
 	);
 }
 
 TransactionsFilterAccordionHeader.propTypes = {
-	text: PropTypes.string.isRequired,
+	children: PropTypes.node.isRequired,
 };
 
 export default TransactionsFilterAccordionHeader;

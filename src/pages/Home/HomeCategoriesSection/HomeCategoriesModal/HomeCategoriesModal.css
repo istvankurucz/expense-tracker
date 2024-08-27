@@ -1,0 +1,23 @@
+.homeCategoriesModal__table__loading,
+.homeCategoriesModal__table__noData {
+	text-align: center;
+	padding-block: 3rem;
+}
+
+.homeCategoriesModal__table__th--category {
+	justify-content: flex-start !important;
+}
+.homeCategoriesModal__table__td--category {
+	display: flex;
+	gap: 1rem;
+	align-items: center;
+	text-transform: capitalize;
+}
+
+.homeCategoriesModal__table__th--amount {
+	justify-content: flex-end !important;
+}
+.homeCategoriesModal__table__td--amount {
+	text-align: right;
+	font-weight: 500;
+}

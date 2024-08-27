@@ -7,7 +7,7 @@ import ModalTitle from "./ModalTitle";
 import "./Modal.css";
 
 function Modal({ className, children }) {
-	return <div className={`modal${className ? ` ${className}` : ""}`}>{children}</div>;
+	return <div className={`modal scrollbar${className ? ` ${className}` : ""}`}>{children}</div>;
 }
 
 Modal.propTypes = {

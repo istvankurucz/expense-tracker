@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
 	faAngleDown,
+	faArrowRightToBracket,
 	faBars,
 	faHouse,
 	faPlus,
@@ -63,6 +64,11 @@ function Header() {
 									)}
 									<hr className="header__submenu__divider" />
 									<li className="header__menu__item--accent">
+										<IconLink to="/join-group">
+											<FontAwesomeIcon icon={faArrowRightToBracket} /> Csatlakozás
+										</IconLink>
+									</li>
+									<li className="header__menu__item--accent">
 										<IconLink to="/new-group">
 											<FontAwesomeIcon icon={faPlus} /> Új csoport
 										</IconLink>
@@ -80,6 +86,9 @@ function Header() {
 									<li>
 										<Link to="/">Adataim</Link>
 									</li>
+									<li>
+										<Link to="/">Jelentések</Link>
+									</li>
 									<hr className="header__submenu__divider" />
 									<li>
 										<Header.AuthButton />
@@ -94,8 +103,7 @@ function Header() {
 						outlined
 						icon
 						className="header__hamburger"
-						onClick={() => setShowSidebar((show) => !show)}
-					>
+						onClick={() => setShowSidebar((show) => !show)}>
 						<FontAwesomeIcon icon={faBars} />
 					</Button>
 				</div>

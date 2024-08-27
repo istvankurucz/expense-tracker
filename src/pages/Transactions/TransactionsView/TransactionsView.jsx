@@ -9,7 +9,7 @@ import "./TransactionsView.css";
 
 function TransactionsView({ view, setView }) {
 	// States
-	const [showList, setShowList] = useState(true);
+	const [showList, setShowList] = useState(false);
 
 	return (
 		<Dropdown>
@@ -17,8 +17,7 @@ function TransactionsView({ view, setView }) {
 				variant="secondary"
 				round
 				title="Nézet"
-				onClick={() => setShowList((show) => !show)}
-			>
+				onClick={() => setShowList((show) => !show)}>
 				<FontAwesomeIcon icon={faTable} />
 				<span className="transactions__settings__button__text">Nézet</span>
 			</Button>

@@ -1,8 +1,14 @@
+import PropTypes from "prop-types";
 import Section from "../../../components/layout/Section/Section";
 import Chart from "../../../components/ui/Chart/Chart";
 import TabSelect from "../../../components/ui/TabSelect/TabSelect";
 import useCategoriesChart from "../../../hooks/chart/useCategoriesChart";
+import Button from "../../../components/ui/Button/Button";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTable } from "@fortawesome/free-solid-svg-icons";
 import "./HomeCategoriesSection.css";
+import { useState } from "react";
+import HomeCategoriesModal from "./HomeCategoriesModal/HomeCategoriesModal";
 
 const tabSelectItems = [
 	{
@@ -16,10 +22,19 @@ const tabSelectItems = [
 ];
 
 function HomeCategoriesSection({ transactions = [], loading }) {
-	const { index, setIndex, chartData, chartLegend } = useCategoriesChart(transactions);
+	const { index, setIndex, categorizedTransactions, chartData, chartLegend } =
+		useCategoriesChart(transactions);
+	const [showModal, setShowModal] = useState(false);
 
 	return (
 		<Section id="homeCategories">
+			<HomeCategoriesModal
+				transctions={categorizedTransactions}
+				loading={loading}
+				show={showModal}
+				setShow={setShowModal}
+			/>
+
 			<Section.Title>Kategóriánkénti megoszlás</Section.Title>
 
 			<TabSelect
@@ -27,6 +42,13 @@ function HomeCategoriesSection({ transactions = [], loading }) {
 				index={index}
 				setIndex={setIndex}
 			/>
+
+			<div className="homeCategoriesSection__table">
+				<Button variant="primary" round onClick={() => setShowModal(true)}>
+					<FontAwesomeIcon icon={faTable} />
+					Táblázat
+				</Button>
+			</div>
 
 			{loading ? (
 				<Chart.Loading />
@@ -47,5 +69,10 @@ function HomeCategoriesSection({ transactions = [], loading }) {
 		</Section>
 	);
 }
+
+HomeCategoriesSection.propTypes = {
+	transactions: PropTypes.array.isRequired,
+	loading: PropTypes.bool,
+};
 
 export default HomeCategoriesSection;

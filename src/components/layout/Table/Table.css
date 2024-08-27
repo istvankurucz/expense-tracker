@@ -1,0 +1,52 @@
+.table__container {
+	overflow-x: auto;
+	padding-inline: 0.25rem;
+}
+
+.table {
+	--border: 0.1rem solid var(--info-color);
+
+	min-width: 100%;
+	border-collapse: collapse;
+}
+.table thead {
+	border-bottom: var(--border);
+}
+
+.table th {
+	font-weight: 500;
+	padding-block: 0.5rem;
+}
+.table__th--sortable {
+	display: flex;
+	gap: 0.5rem;
+	justify-content: center;
+	align-items: center;
+}
+.table--sortable th {
+	user-select: none;
+	cursor: pointer;
+}
+
+.table--sortable th svg {
+	--color: var(--text-color);
+
+	color: var(--color);
+}
+.table--sortable th svg.table__th__icon--info {
+	--color: var(--info-color);
+}
+
+.table tbody tr {
+	transition: background-color 200ms ease;
+}
+.table tbody tr:not(:last-child) {
+	border-bottom: var(--border);
+}
+.table tbody tr:hover {
+	background-color: var(--secondary-color);
+}
+
+.table tbody td {
+	padding-block: 0.5rem;
+}

@@ -13,4 +13,8 @@
 
 .groupRow__arrow {
 	margin-left: auto;
+	transition: color 200ms ease;
+}
+.groupRow:hover .groupRow__arrow {
+	color: var(--accent-color);
 }

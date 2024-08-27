@@ -1,0 +1,17 @@
+.accordionHeader {
+	--justify-content: flex-start;
+
+	display: flex;
+	gap: 1rem;
+	justify-content: var(--justify-content);
+	align-items: center;
+	margin-bottom: 1rem;
+}
+
+.accordionHeader__icon--rotate {
+	rotate: 90deg;
+	transition: rotate 200ms ease;
+}
+.accordion--expanded .accordionHeader__icon--rotate {
+	rotate: 0deg;
+}
