@@ -1,0 +1,41 @@
+.sidebar {
+	background-color: var(--primary-color);
+	border-right: 0.1rem solid var(--info-color);
+	padding: 2rem 1rem;
+}
+
+.sidebar__button {
+	display: none;
+	border-radius: 0 var(--br-pill) var(--br-pill) 0;
+	opacity: 0.5;
+	padding: 0.75rem 1rem;
+	position: absolute;
+	top: 2rem;
+	left: 100%;
+	cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+	.sidebar {
+		position: fixed;
+		top: 4rem;
+		bottom: 0;
+		z-index: 10;
+		translate: -100% 0;
+		transition: translate 300ms ease;
+	}
+	.sidebar--show {
+		translate: 0 0;
+	}
+
+	.sidebar__button {
+		display: flex;
+	}
+
+	.sidebar__button svg {
+		transition: rotate 200ms ease;
+	}
+	.sidebar--show .sidebar__button svg {
+		rotate: 180deg;
+	}
+}

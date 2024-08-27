@@ -1,15 +1,10 @@
 import PropTypes from "prop-types";
 import { useGroupContext } from "../../../contexts/group/GroupContext";
-import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-	faAngleDoubleRight,
-	faGear,
-	faInfo,
-	faRectangleList,
-} from "@fortawesome/free-solid-svg-icons";
-import Button from "../../../components/ui/Button/Button";
+import { faGear, faInfo, faRectangleList } from "@fortawesome/free-solid-svg-icons";
 import useCloseSidebar from "../../../hooks/dom/useCloseSidebar";
+import Sidebar from "../../../components/layout/Sidebar/Sidebar";
+import Divider from "../../../components/ui/Divider/Divider";
 import "./GroupSidebar.css";
 
 function GroupSidebar({ show, setShow }) {
@@ -17,47 +12,32 @@ function GroupSidebar({ show, setShow }) {
 	const { group } = useGroupContext();
 
 	return (
-		<aside className={`groupSidebar${show ? " groupSidebar--show" : ""}`}>
+		<Sidebar show={show} setShow={setShow}>
 			<h3 className="groupSidebar__name">{group?.name}</h3>
 
 			<nav className="groupSidebar__nav">
-				<ul className="groupSidebar__menu">
-					<li className="groupSidebar__menu__item">
-						<Link to={`/groups/${group.id}/overview`}>
-							<FontAwesomeIcon icon={faInfo} />
-							Áttekintés
-						</Link>
-					</li>
+				<Sidebar.Menu>
+					<Sidebar.Menu.Item link={`/groups/${group.id}/overview`}>
+						<FontAwesomeIcon icon={faInfo} />
+						Áttekintés
+					</Sidebar.Menu.Item>
 
-					<hr className="groupSidebar__menu__divider" />
+					<Divider variant="secondary" />
 
-					<li className="groupSidebar__menu__item">
-						<Link to="">
-							<FontAwesomeIcon icon={faRectangleList} />
-							Jelentések
-						</Link>
-					</li>
+					<Sidebar.Menu.Item link="">
+						<FontAwesomeIcon icon={faRectangleList} />
+						Jelentések
+					</Sidebar.Menu.Item>
 
-					<hr className="groupSidebar__menu__divider" />
+					<Divider variant="secondary" />
 
-					<li className="groupSidebar__menu__item">
-						<Link to={`/groups/${group.id}/settings`}>
-							<FontAwesomeIcon icon={faGear} />
-							Beállítások
-						</Link>
-					</li>
-				</ul>
+					<Sidebar.Menu.Item link={`/groups/${group.id}/settings`}>
+						<FontAwesomeIcon icon={faGear} />
+						Beállítások
+					</Sidebar.Menu.Item>
+				</Sidebar.Menu>
 			</nav>
-
-			<Button
-				variant="info"
-				title="Menü"
-				className="groupSidebar__button"
-				onClick={() => setShow((show) => !show)}
-			>
-				<FontAwesomeIcon icon={faAngleDoubleRight} />
-			</Button>
-		</aside>
+		</Sidebar>
 	);
 }
 

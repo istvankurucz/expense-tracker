@@ -17,6 +17,8 @@ import GroupProvider from "./contexts/group/GroupContext";
 import Transactions from "./pages/Transactions/Transactions";
 import TransactionDetails from "./pages/Transactions/TransactionDetails/TransactionDetails";
 import "./App.css";
+import Profile from "./pages/Profile/Profile";
+import ProfileData from "./pages/Profile/ProfileData/ProfileData";
 
 function App() {
 	// Hooks
@@ -41,6 +43,7 @@ function App() {
 			{location?.pathname !== "/new-transaction" && <NewTransactionButton />}
 
 			<Routes>
+				{/* Transactions */}
 				<Route
 					path="/new-transaction"
 					element={renderWithHeaderAndFooter(<NewTransaction />)}
@@ -53,6 +56,7 @@ function App() {
 					element={renderWithHeaderAndFooter(<NewTransaction edit />)}
 				/>
 
+				{/* Groups */}
 				<Route path="/groups" element={renderWithHeaderAndFooter(<Groups />)} />
 				<Route path="/new-group" element={renderWithHeaderAndFooter(<NewGroup />)} />
 				<Route path="/join-group" element={renderWithHeaderAndFooter(<JoinGroup />)} />
@@ -64,6 +68,13 @@ function App() {
 					<Route path="settings" element={<Group.Settings />} />
 				</Route>
 
+				{/* Profile */}
+				<Route path="/profile" element={renderWithHeaderAndFooter(<Profile />)}>
+					<Route index element={<Navigate to="data" replace />} />
+					<Route path="data" element={<ProfileData />} />
+				</Route>
+
+				{/* Auth */}
 				<Route path="/signin" element={<SignIn />} />
 				<Route path="/signup" element={<SignUp />} />
 				<Route path="/password-reset" element={<PasswordReset />} />

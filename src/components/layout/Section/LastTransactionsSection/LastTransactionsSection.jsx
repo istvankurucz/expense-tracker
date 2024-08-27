@@ -11,13 +11,12 @@ function LastTransactionsSection({ transactions = [], loading }) {
 	const { groupId } = useParams();
 
 	return (
-		<Section id="homeLastTransactions">
-			<Section.Title className="home__transactions__title">
+		<Section id="lastTransactions">
+			<Section.Title className="lastTransactions__title">
 				Legutóbbi tranzakciók
 				<Link
 					to={`/transactions${groupId != undefined ? `?groupId=${groupId}` : ""}`}
-					className="home__transactions__title__link"
-				>
+					className="lastTransactions__title__link">
 					Összes
 				</Link>
 			</Section.Title>
@@ -27,7 +26,7 @@ function LastTransactionsSection({ transactions = [], loading }) {
 					<Spinner variant="text" size="3rem" text="Legutóbbi tranzakciók betöltése" />
 				</div>
 			) : (
-				<div className="home__transactions__container">
+				<div className="lastTransactions__container scrollbar">
 					{transactions.slice(0, 5).map((transaction, i) => (
 						<Fragment key={transaction.id}>
 							<Transaction

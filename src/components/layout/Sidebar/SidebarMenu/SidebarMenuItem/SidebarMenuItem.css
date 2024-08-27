@@ -1,0 +1,15 @@
+.sidebarMenuItem a {
+	display: flex;
+	gap: 1rem;
+	text-decoration: none;
+	color: var(--text-color);
+	padding: 0.5rem 1rem;
+	transition: color 200ms ease;
+}
+.sidebarMenuItem a:hover {
+	color: var(--accent-color);
+}
+
+.sidebarMenuItem a svg {
+	width: 1rem;
+}

@@ -76,7 +76,7 @@ function Header() {
 								</ul>
 							</li>
 							<li className="header__menu__item--submenu">
-								<Link to="/" title="Profil">
+								<Link to="/profile/data" title="Profil">
 									<FontAwesomeIcon icon={faUser} />
 									Profil
 									<FontAwesomeIcon icon={faAngleDown} />
@@ -84,10 +84,10 @@ function Header() {
 
 								<ul className="header__submenu">
 									<li>
-										<Link to="/">Adataim</Link>
+										<Link to="/profile/data">Adataim</Link>
 									</li>
 									<li>
-										<Link to="/">Jelentések</Link>
+										<Link to="/profile/reports">Jelentések</Link>
 									</li>
 									<hr className="header__submenu__divider" />
 									<li>

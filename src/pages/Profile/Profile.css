@@ -1,0 +1,9 @@
+.profile__container {
+	min-height: var(--min-height);
+	display: flex;
+}
+
+.profile__body {
+	flex: 1;
+	padding-left: 1rem;
+}

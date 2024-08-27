@@ -92,10 +92,10 @@ function HeaderSidebar({ show, setShow, groups = [] }) {
 						{showProfileSubmenu && (
 							<ul className="headerSidebar__submenu">
 								<li>
-									<Link to="/">Adataim</Link>
+									<Link to="/profile/data">Adataim</Link>
 								</li>
 								<li>
-									<Link to="/">Jelentések</Link>
+									<Link to="/profile/reports">Jelentések</Link>
 								</li>
 								<li>
 									<Header.AuthButton />

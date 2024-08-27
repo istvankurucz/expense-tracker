@@ -1,14 +1,14 @@
 import PropTypes from "prop-types";
+import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTable } from "@fortawesome/free-solid-svg-icons";
 import Section from "../../../components/layout/Section/Section";
 import Chart from "../../../components/ui/Chart/Chart";
 import TabSelect from "../../../components/ui/TabSelect/TabSelect";
 import useCategoriesChart from "../../../hooks/chart/useCategoriesChart";
 import Button from "../../../components/ui/Button/Button";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTable } from "@fortawesome/free-solid-svg-icons";
-import "./HomeCategoriesSection.css";
-import { useState } from "react";
 import HomeCategoriesModal from "./HomeCategoriesModal/HomeCategoriesModal";
+import "./HomeCategoriesSection.css";
 
 const tabSelectItems = [
 	{

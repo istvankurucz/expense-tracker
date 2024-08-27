@@ -1,4 +1,29 @@
+.lastTransactions__title {
+	display: flex;
+	gap: 2rem;
+	justify-content: space-between;
+}
+
+.lastTransactions__title__link {
+	font-size: var(--fs-s);
+}
+
 .lastTransactionSection__loading {
 	text-align: center;
 	padding-block: 3rem;
+}
+
+.lastTransactions__container {
+	padding-left: 0.25rem;
+	position: relative;
+	overflow-x: auto;
+}
+.lastTransactions__container::after {
+	content: "";
+	height: 3rem;
+	background: linear-gradient(to top, var(--primary-color), transparent);
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
 }
