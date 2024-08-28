@@ -16,9 +16,10 @@ import JoinGroup from "./pages/JoinGroup/JoinGroup";
 import GroupProvider from "./contexts/group/GroupContext";
 import Transactions from "./pages/Transactions/Transactions";
 import TransactionDetails from "./pages/Transactions/TransactionDetails/TransactionDetails";
-import "./App.css";
 import Profile from "./pages/Profile/Profile";
 import ProfileData from "./pages/Profile/ProfileData/ProfileData";
+import ProfileReports from "./pages/Profile/ProfileReports/ProfileReports";
+import "./App.css";
 
 function App() {
 	// Hooks
@@ -62,9 +63,11 @@ function App() {
 				<Route path="/join-group" element={renderWithHeaderAndFooter(<JoinGroup />)} />
 				<Route
 					path="/groups/:groupId"
-					element={<GroupProvider>{renderWithHeaderAndFooter(<Group />)}</GroupProvider>}>
+					element={<GroupProvider>{renderWithHeaderAndFooter(<Group />)}</GroupProvider>}
+				>
 					<Route index element={<Navigate to="overview" replace />} />
 					<Route path="overview" element={<Group.Overview />} />
+					<Route path="reports" element={<Group.Reports />} />
 					<Route path="settings" element={<Group.Settings />} />
 				</Route>
 
@@ -72,6 +75,7 @@ function App() {
 				<Route path="/profile" element={renderWithHeaderAndFooter(<Profile />)}>
 					<Route index element={<Navigate to="data" replace />} />
 					<Route path="data" element={<ProfileData />} />
+					<Route path="reports" element={<ProfileReports />} />
 				</Route>
 
 				{/* Auth */}

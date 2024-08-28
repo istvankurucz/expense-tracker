@@ -1,48 +1,16 @@
 import { useEffect, useState } from "react";
 import getTransactionsFromThisMonth from "../../utils/transaction/getTransactionsFromThisMonth";
 import sumTransactions from "../../utils/transaction/sumTransactions";
+import getBarHeights from "../../utils/chart/getBarHeights";
 import formatPrice from "../../utils/format/formatPrice";
-
-const defaultChartData = [
-	{
-		name: "income",
-		text: "Bevétel",
-		value: "0 Ft",
-		width: "10rem",
-		height: 0,
-		color: "var(--success-color)",
-	},
-	{
-		name: "expense",
-		text: "Kiadás",
-		value: "0 Ft",
-		width: "10rem",
-		height: 0,
-		color: "var(--danger-color)",
-	},
-];
+import defaultBalanceChartData from "../../assets/chart/defaultBalanceChartData";
 
 function useIncomeExpenseChart(transactions = []) {
 	// States
 	const [index, setIndex] = useState(0);
-	const [chartData, setChartData] = useState(defaultChartData);
+	const [chartData, setChartData] = useState(defaultBalanceChartData);
 
 	// Functions
-	function getBarHeights(sums) {
-		const { sumOfExpenses, sumOfIncomes } = sums;
-
-		let incomeHeight, expenseHeight;
-		if (sumOfIncomes > sumOfExpenses) {
-			incomeHeight = 100;
-			expenseHeight = (sumOfExpenses / sumOfIncomes) * 100;
-		} else {
-			expenseHeight = 100;
-			incomeHeight = (sumOfIncomes / sumOfExpenses) * 100;
-		}
-
-		return { incomeHeight, expenseHeight };
-	}
-
 	function updateChartData(values, heights) {
 		// Update the state
 		setChartData((data) => {

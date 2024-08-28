@@ -6,6 +6,7 @@ import useCloseSidebar from "../../../hooks/dom/useCloseSidebar";
 import Sidebar from "../../../components/layout/Sidebar/Sidebar";
 import Divider from "../../../components/ui/Divider/Divider";
 import "./GroupSidebar.css";
+import checkActiveMenuItem from "../../../utils/dom/checkActiveMenuItem";
 
 function GroupSidebar({ show, setShow }) {
 	useCloseSidebar(setShow);
@@ -17,21 +18,30 @@ function GroupSidebar({ show, setShow }) {
 
 			<nav className="groupSidebar__nav">
 				<Sidebar.Menu>
-					<Sidebar.Menu.Item link={`/groups/${group.id}/overview`}>
+					<Sidebar.Menu.Item
+						link={`/groups/${group.id}/overview`}
+						active={checkActiveMenuItem(`/groups/${group.id}/overview`)}
+					>
 						<FontAwesomeIcon icon={faInfo} />
 						Áttekintés
 					</Sidebar.Menu.Item>
 
 					<Divider variant="secondary" />
 
-					<Sidebar.Menu.Item link="">
+					<Sidebar.Menu.Item
+						link={`/groups/${group.id}/reports`}
+						active={checkActiveMenuItem(`/groups/${group.id}/reports`)}
+					>
 						<FontAwesomeIcon icon={faRectangleList} />
 						Jelentések
 					</Sidebar.Menu.Item>
 
 					<Divider variant="secondary" />
 
-					<Sidebar.Menu.Item link={`/groups/${group.id}/settings`}>
+					<Sidebar.Menu.Item
+						link={`/groups/${group.id}/settings`}
+						active={checkActiveMenuItem(`/groups/${group.id}/settings`)}
+					>
 						<FontAwesomeIcon icon={faGear} />
 						Beállítások
 					</Sidebar.Menu.Item>

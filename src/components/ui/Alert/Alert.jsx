@@ -9,7 +9,7 @@ function Alert({
 	setShow,
 	variant = "secondary",
 	icon = faExclamation,
-	className,
+	className = "",
 	children,
 }) {
 	return (

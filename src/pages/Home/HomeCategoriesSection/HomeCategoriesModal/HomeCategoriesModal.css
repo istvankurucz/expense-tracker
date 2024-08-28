@@ -1,4 +1,3 @@
-.homeCategoriesModal__table__loading,
 .homeCategoriesModal__table__noData {
 	text-align: center;
 	padding-block: 3rem;
@@ -19,5 +18,4 @@
 }
 .homeCategoriesModal__table__td--amount {
 	text-align: right;
-	font-weight: 500;
 }

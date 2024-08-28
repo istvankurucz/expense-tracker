@@ -6,7 +6,8 @@
 	padding: 0.5rem 1rem;
 	transition: color 200ms ease;
 }
-.sidebarMenuItem a:hover {
+.sidebarMenuItem a:hover,
+.sidebarMenuItem--active a {
 	color: var(--accent-color);
 }
 

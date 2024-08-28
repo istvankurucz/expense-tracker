@@ -9,6 +9,7 @@ import useCategoriesChart from "../../../hooks/chart/useCategoriesChart";
 import Button from "../../../components/ui/Button/Button";
 import HomeCategoriesModal from "./HomeCategoriesModal/HomeCategoriesModal";
 import "./HomeCategoriesSection.css";
+import SectionSpinner from "../../../components/ui/Spinner/SectionSpinner/SectionSpinner";
 
 const tabSelectItems = [
 	{
@@ -51,7 +52,7 @@ function HomeCategoriesSection({ transactions = [], loading }) {
 			</div>
 
 			{loading ? (
-				<Chart.Loading />
+				<SectionSpinner text="Grafikon betöltése" />
 			) : (
 				<Chart type="pie" justify="center" size="16rem" legend={chartLegend}>
 					{chartData.map((data, i) => (

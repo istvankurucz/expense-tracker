@@ -52,6 +52,14 @@
 .spinner--text {
 	--color: var(--text-color);
 }
+
+.spinner--success {
+	--color: var(--success-color);
+}
+
+.spinner--danger {
+	--color: var(--danger-color);
+}
 /* #endregion */
 
 /* #region Types */

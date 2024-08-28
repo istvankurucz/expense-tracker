@@ -34,7 +34,8 @@ function HeaderSidebar({ show, setShow, groups = [] }) {
 					outlined
 					icon
 					className="headerSidebar__hide"
-					onClick={() => setShow(false)}>
+					onClick={() => setShow(false)}
+				>
 					<FontAwesomeIcon icon={faAngleDoubleLeft} />
 				</Button>
 			</div>
@@ -50,10 +51,7 @@ function HeaderSidebar({ show, setShow, groups = [] }) {
 						</Link>
 					</li>
 					<li>
-						<Link
-							to=""
-							title="Csoportok"
-							onClick={() => setShowGroupSubmenu((show) => !show)}>
+						<Link title="Csoportok" onClick={() => setShowGroupSubmenu((show) => !show)}>
 							<FontAwesomeIcon icon={faUsers} />
 							Csoportok
 							<FontAwesomeIcon icon={faAngleDown} />
@@ -83,7 +81,7 @@ function HeaderSidebar({ show, setShow, groups = [] }) {
 						)}
 					</li>
 					<li>
-						<Link to="" title="Profil" onClick={() => setShowProfileSubmenu((show) => !show)}>
+						<Link title="Profil" onClick={() => setShowProfileSubmenu((show) => !show)}>
 							<FontAwesomeIcon icon={faUser} />
 							Profil
 							<FontAwesomeIcon icon={faAngleDown} />

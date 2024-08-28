@@ -7,3 +7,9 @@
 	flex: 1;
 	padding-left: 1rem;
 }
+
+@media screen and (max-width: 768px) {
+	.profile__body {
+		padding-left: 0;
+	}
+}

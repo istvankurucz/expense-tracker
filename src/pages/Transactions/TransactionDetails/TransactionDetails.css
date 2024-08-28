@@ -1,8 +1,3 @@
-.transactionDetails__body__loading {
-	text-align-last: center;
-	padding-block: 3rem;
-}
-
 .transactionDetails__body__noTransaction {
 	text-align: center;
 	padding-block: 2rem;

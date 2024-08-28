@@ -3,8 +3,8 @@ import { Outlet } from "react-router-dom";
 import Container from "../../components/layout/Container/Container";
 import UserLoadingFrame from "../../components/layout/LoadingFrame/UserLoadingFrame/UserLoadingFrame";
 import Page from "../../components/layout/Page/Page";
-import "./Profile.css";
 import ProfileSidebar from "./ProfileSidebar/ProfileSidebar";
+import "./Profile.css";
 
 function Profile() {
 	const [showSidebar, setShowSidebar] = useState(false);

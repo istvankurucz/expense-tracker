@@ -23,6 +23,7 @@ function GroupSettings() {
 	const navigate = useNavigate();
 
 	// Variables
+	const maxWidth = "600px";
 	const admin = group?.roles.find((role) => role.role === "admin").member;
 
 	// Functions
@@ -115,11 +116,11 @@ function GroupSettings() {
 				/>
 			)}
 
-			<Section id="groupSettingsTitle">
+			<Section maxWidth={maxWidth} id="groupSettingsTitle" className="groupSettings__section">
 				<Page.Title>Beállítások</Page.Title>
 			</Section>
 
-			<Section id="groupSettingsData">
+			<Section maxWidth={maxWidth} id="groupSettingsData" className="groupSettings__section">
 				<Section.Title>Csoport adatai</Section.Title>
 
 				<div className="groupSettings__data">
@@ -172,7 +173,7 @@ function GroupSettings() {
 				</div>
 			</Section>
 
-			<Section id="groupSettingsLeave">
+			<Section maxWidth={maxWidth} id="groupSettingsLeave" className="groupSettings__section">
 				<Section.Title>Csoport elhagyása</Section.Title>
 
 				<p className="groupSettings__p">

@@ -8,11 +8,6 @@
 	text-decoration: none;
 }
 
-.groups__my__loading {
-	text-align: center;
-	padding-block: 3rem;
-}
-
 .groups__my__container {
 	display: flex;
 	flex-direction: column;

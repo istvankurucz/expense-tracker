@@ -5,6 +5,7 @@ import { faDatabase, faRectangleList } from "@fortawesome/free-solid-svg-icons";
 import Sidebar from "../../../components/layout/Sidebar/Sidebar";
 import useCloseSidebar from "../../../hooks/dom/useCloseSidebar";
 import Divider from "../../../components/ui/Divider/Divider";
+import checkActiveMenuItem from "../../../utils/dom/checkActiveMenuItem";
 import "./ProfileSidebar.css";
 
 function ProfileSidebar({ show, setShow }) {
@@ -17,14 +18,20 @@ function ProfileSidebar({ show, setShow }) {
 
 			<nav className="profileSidebar__nav">
 				<Sidebar.Menu>
-					<Sidebar.Menu.Item link="/profile/data">
+					<Sidebar.Menu.Item
+						link="/profile/data"
+						active={checkActiveMenuItem("/profile/data")}
+					>
 						<FontAwesomeIcon icon={faDatabase} />
 						Adataim
 					</Sidebar.Menu.Item>
 
 					<Divider />
 
-					<Sidebar.Menu.Item link="/profile/reports">
+					<Sidebar.Menu.Item
+						link="/profile/reports"
+						active={checkActiveMenuItem("/profile/reports")}
+					>
 						<FontAwesomeIcon icon={faRectangleList} />
 						Jelentések
 					</Sidebar.Menu.Item>

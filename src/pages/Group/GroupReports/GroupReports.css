@@ -1,0 +1,6 @@
+.groupReports__container {
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+	margin-top: 2rem;
+}

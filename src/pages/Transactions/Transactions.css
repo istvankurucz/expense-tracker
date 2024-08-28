@@ -16,11 +16,6 @@
 	align-items: flex-start;
 }
 
-.transactions__table__loading {
-	text-align: center;
-	padding-block: 3rem;
-}
-
 .transactions__accordion:not(:last-child) {
 	margin-bottom: 1.5rem;
 }

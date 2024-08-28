@@ -1,5 +1,5 @@
 import { useLayoutEffect, useState } from "react";
-import calcPageMinHeight from "../../utils/general/calcPageMinHeight";
+import calcPageMinHeight from "../../utils/dom/calcPageMinHeight";
 
 function usePageMinHeight() {
 	const [minHeight, setMinHeight] = useState(calcPageMinHeight());

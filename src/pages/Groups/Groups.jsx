@@ -7,9 +7,9 @@ import UserLoadingFrame from "../../components/layout/LoadingFrame/UserLoadingFr
 import Button from "../../components/ui/Button/Button";
 import GroupRow from "../../components/ui/GroupRow/GroupRow";
 import NoGroup from "../../components/layout/Section/NoGroup/NoGroup";
-import "./Groups.css";
 import checkIfAdmin from "../../utils/group/checkIfAdmin";
-import Spinner from "../../components/ui/Spinner/Spinner";
+import SectionSpinner from "../../components/ui/Spinner/SectionSpinner/SectionSpinner";
+import "./Groups.css";
 
 function Groups() {
 	// States
@@ -47,9 +47,7 @@ function Groups() {
 					<Section.Title>Csoportjaim</Section.Title>
 
 					{groupLoading ? (
-						<div className="groups__my__loading">
-							<Spinner variant="accent" size="5rem" text="Csoportjaid betöltése" centered />
-						</div>
+						<SectionSpinner text="Csoportok betöltése" />
 					) : groups.length === 0 ? (
 						<NoGroup />
 					) : (

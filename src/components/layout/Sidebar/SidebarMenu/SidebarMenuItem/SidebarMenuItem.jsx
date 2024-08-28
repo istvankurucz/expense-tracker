@@ -2,9 +2,13 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import "./SidebarMenuItem.css";
 
-function SidebarMenuItem({ link, className = "", children }) {
+function SidebarMenuItem({ link, active = false, className = "", children }) {
 	return (
-		<li className={`sidebarMenuItem${className ? ` ${className}` : ""}`}>
+		<li
+			className={`sidebarMenuItem${active ? " sidebarMenuItem--active" : ""}${
+				className ? ` ${className}` : ""
+			}`}
+		>
 			<Link to={link}>{children}</Link>
 		</li>
 	);
@@ -12,6 +16,7 @@ function SidebarMenuItem({ link, className = "", children }) {
 
 SidebarMenuItem.propTypes = {
 	link: PropTypes.string.isRequired,
+	active: PropTypes.bool,
 	className: PropTypes.string,
 	children: PropTypes.node.isRequired,
 };

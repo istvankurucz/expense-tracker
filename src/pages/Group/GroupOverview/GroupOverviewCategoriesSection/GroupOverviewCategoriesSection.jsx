@@ -5,6 +5,7 @@ import getCategoryPieChartData from "../../../../utils/chart/getCategoryPieChart
 import getCategoryPieChartLegend from "../../../../utils/chart/getCategoryPieChartLegend";
 import "./GroupOverviewCategoriesSection.css";
 import Chart from "../../../../components/ui/Chart/Chart";
+import SectionSpinner from "../../../../components/ui/Spinner/SectionSpinner/SectionSpinner";
 
 function GroupOverviewCategoriesSection({ transactions = [], loading }) {
 	// Variables
@@ -12,14 +13,12 @@ function GroupOverviewCategoriesSection({ transactions = [], loading }) {
 	const chartData = transactions.length === 0 ? [] : getCategoryPieChartData(groupedTransactions);
 	const chartLegend = getCategoryPieChartLegend(groupedTransactions);
 
-	// Functions
-
 	return (
 		<Section id="groupOverviewCategories">
 			<Section.Title>Kategóriánkénti eloszlás</Section.Title>
 
 			{loading ? (
-				<Chart.Loading />
+				<SectionSpinner text="Grafikon betöltése" />
 			) : (
 				<Chart type="pie" legend={chartLegend}>
 					{chartData.map((category, i) => (

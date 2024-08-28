@@ -7,6 +7,7 @@ import GroupSidebar from "./GroupSidebar/GroupSidebar";
 import GroupSettings from "./GroupSettings/GroupSettings";
 import GroupOverview from "./GroupOverview/GroupOverview";
 import "./Group.css";
+import GroupReports from "./GroupReports/GroupReports";
 
 function Group() {
 	// States
@@ -29,6 +30,7 @@ function Group() {
 
 Group.Sidebar = GroupSidebar;
 Group.Overview = GroupOverview;
+Group.Reports = GroupReports;
 Group.Settings = GroupSettings;
 
 export default Group;

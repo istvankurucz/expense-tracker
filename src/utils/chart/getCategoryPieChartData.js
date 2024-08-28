@@ -29,7 +29,7 @@ export default function getCategoryPieChartData(groups = []) {
 			fromDegree: fromDegree - degree,
 			degree,
 			color: category.category.colors.text,
-			name: "",
+			name: category.amount,
 			value: `${Math.round(ratio * 100)} %`,
 		};
 	});

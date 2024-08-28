@@ -1,0 +1,70 @@
+.report {
+	--px: 1rem;
+	--py: 1rem;
+}
+
+.report__header {
+	justify-content: space-between;
+	font-weight: 500;
+	padding-top: var(--py);
+	padding-inline: var(--px);
+}
+
+.report__body {
+	border-top: 0.1rem solid var(--info-color);
+	padding-block: var(--py);
+	padding-inline: var(--px);
+}
+
+.report__section {
+	margin-bottom: 2rem;
+}
+.report .report__section:last-child {
+	margin-bottom: 0;
+}
+
+.report__section__title {
+	font-weight: 500;
+	margin-bottom: 1rem;
+}
+
+.report__section__chart {
+	display: flex;
+	gap: 3rem;
+	/* align-items: center; */
+}
+
+.report__section__chart__diff {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	align-items: center;
+	margin-right: 5rem;
+}
+
+.report__section__chart__diff__value {
+	font-size: var(--fs-l);
+	font-weight: 500;
+	color: var(--color);
+}
+/* #region Variants */
+.report__section__chart__diff__value--success {
+	--color: var(--success-color);
+}
+.report__section__chart__diff__value--danger {
+	--color: var(--danger-color);
+}
+/* #endregion */
+
+@media screen and (max-width: 992px) {
+	.report__section__chart__diff {
+		margin-right: 0;
+	}
+}
+
+@media screen and (max-width: 576px) {
+	.report__section__chart {
+		flex-direction: column;
+		gap: 1rem;
+	}
+}

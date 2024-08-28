@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
 import ChartBar from "./ChartBar/ChartBar";
 import ChartPie from "./ChartPie/ChartPie";
-import ChartLoading from "../Loading/ChartLoading/ChartLoading";
 import "./Chart.css";
 
 function Chart({
@@ -49,6 +48,5 @@ Chart.propTypes = {
 
 Chart.Bar = ChartBar;
 Chart.Pie = ChartPie;
-Chart.Loading = ChartLoading;
 
 export default Chart;

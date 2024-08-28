@@ -4,6 +4,7 @@ import Chart from "../../../components/ui/Chart/Chart";
 import TabSelect from "../../../components/ui/TabSelect/TabSelect";
 import useIncomeExpenseChart from "../../../hooks/chart/useIncomeExpenseChart";
 import "./HomeBalanceSection.css";
+import SectionSpinner from "../../../components/ui/Spinner/SectionSpinner/SectionSpinner";
 
 const tabSelectItems = [
 	{
@@ -31,7 +32,7 @@ function HomeBalanceSection({ transactions = [], loading }) {
 			/>
 
 			{loading ? (
-				<Chart.Loading />
+				<SectionSpinner text="Grafikon betöltése" />
 			) : (
 				<Chart type="bar" justify="center">
 					{chartData.map((bar) => (

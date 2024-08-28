@@ -8,11 +8,6 @@
 	font-size: var(--fs-s);
 }
 
-.lastTransactionSection__loading {
-	text-align: center;
-	padding-block: 3rem;
-}
-
 .lastTransactions__container {
 	padding-left: 0.25rem;
 	position: relative;

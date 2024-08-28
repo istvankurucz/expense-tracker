@@ -1,29 +1,17 @@
 import { useCallback, useEffect, useState } from "react";
-import categories from "../../assets/categories";
 import groupTransactions from "../../utils/transaction/groupTransactions";
 import getCategoryPieChartData from "../../utils/chart/getCategoryPieChartData";
 import getCategoryPieChartLegend from "../../utils/chart/getCategoryPieChartLegend";
-
-const filteredCategories = categories.filter((category) => category.type === "expense");
-const defaultChartLegend = filteredCategories.map((category) => ({
-	color: category.colors.text,
-	text: category.text,
-}));
-
-const defaultChartData = filteredCategories.map((category, i) => ({
-	fromDegree: i * (360 / filteredCategories.length),
-	degree: 360 / filteredCategories.length,
-	color: category.colors.text,
-	name: category.text,
-	value: "0 %",
-}));
+import defaultCategoriesChartData, {
+	defaultCategoriesChartLegend,
+} from "../../assets/chart/defaultCategoriesChartData";
 
 function useCategoriesChart(transactions = []) {
 	// States
 	const [index, setIndex] = useState(0);
 	const [categorizedTransactions, setCategorizedTransactions] = useState(transactions);
-	const [chartData, setChartData] = useState(defaultChartData);
-	const [chartLegend, setChartLegend] = useState(defaultChartLegend);
+	const [chartData, setChartData] = useState(defaultCategoriesChartData);
+	const [chartLegend, setChartLegend] = useState(defaultCategoriesChartLegend);
 
 	// Functions
 	const filterTransactions = useCallback(

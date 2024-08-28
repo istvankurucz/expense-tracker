@@ -14,6 +14,7 @@ import TransactionsView from "./TransactionsView/TransactionsView";
 import Accordion from "../../components/ui/Accordion/Accordion";
 import "./Transactions.css";
 import formatMonth from "../../utils/format/formatMonth";
+import SectionSpinner from "../../components/ui/Spinner/SectionSpinner/SectionSpinner";
 
 const cols = [
 	{
@@ -124,9 +125,7 @@ function Transactions() {
 					<br />
 
 					{transactionsLoading ? (
-						<div className="transactions__table__loading">
-							<Spinner variant="text" size="3rem" text="Tranzakciók betöltése" />
-						</div>
+						<SectionSpinner text="Tranzakciók betöltése" />
 					) : view === "table" ? (
 						<Transactions.Table
 							cols={visibleCols}
@@ -143,7 +142,8 @@ function Transactions() {
 									</Accordion.Header>
 								}
 								defaultExpanded={i === 0}
-								className="transactions__accordion">
+								className="transactions__accordion"
+							>
 								<Transactions.Table
 									cols={visibleCols}
 									transactions={transactionGroup}

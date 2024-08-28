@@ -12,6 +12,7 @@ import P from "../../../components/ui/P/P";
 import CategoryIcon from "../../../components/ui/CategoryIcon/CategoryIcon";
 import formatPrice from "../../../utils/format/formatPrice";
 import Divider from "../../../components/ui/Divider/Divider";
+import SectionSpinner from "../../../components/ui/Spinner/SectionSpinner/SectionSpinner";
 
 function TransactionDetails() {
 	const { transaction, transactionLoading } = useTransaction();
@@ -28,9 +29,7 @@ function TransactionDetails() {
 
 				<Modal.Body className="transactionDetails__body">
 					{transactionLoading ? (
-						<div className="transactionDetails__body__loading">
-							<Spinner variant="text" size="3rem" text="Tranzakció betöltése" />
-						</div>
+						<SectionSpinner text="Tranzakció betöltése" />
 					) : transaction === null ? (
 						<div className="transactionDetails__body__noTransaction">
 							<FontAwesomeIcon icon={faBan} />

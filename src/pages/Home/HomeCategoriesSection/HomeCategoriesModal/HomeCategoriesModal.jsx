@@ -13,6 +13,7 @@ import formatPrice from "../../../../utils/format/formatPrice";
 import Spinner from "../../../../components/ui/Spinner/Spinner";
 import sortByCategory from "../../../../utils/sorting/sortByCategory";
 import sortByProperty from "../../../../utils/sorting/sortByProperty";
+import SectionSpinner from "../../../../components/ui/Spinner/SectionSpinner/SectionSpinner";
 
 function HomeCategoriesModal({ transctions = [], loading, show, setShow }) {
 	const { sorting, setSortingParams } = useSorting("amount");
@@ -58,9 +59,7 @@ function HomeCategoriesModal({ transctions = [], loading, show, setShow }) {
 
 				<Modal.Body>
 					{loading ? (
-						<div className="homeCategoriesModal__table__loading">
-							<Spinner variant="text" size="3rem" text="Táblázat betöltése" />
-						</div>
+						<SectionSpinner text="Taáblázat betöltése" />
 					) : categoriesData.length === 0 ? (
 						<div className="homeCategoriesModal__table__noData">Nincs adat.</div>
 					) : (
